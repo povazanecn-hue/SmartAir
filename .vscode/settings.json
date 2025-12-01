@@ -3,9 +3,6 @@
   "python.testing.pytestEnabled": true,
   "python.testing.pytestArgs": ["tests"],
 
-  // Use workspace Python interpreter (activate venv first)
-  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
-
   // Cross-platform: use workspaceFolder for terminal cwd
   "terminal.integrated.cwd": "${workspaceFolder}",
 
