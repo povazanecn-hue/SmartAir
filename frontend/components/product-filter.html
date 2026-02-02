@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartAir - Produkty s filtrom</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+        }
+
+        /* ============== LAYOUT ============== */
+        .products-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            color: #64748b;
+            font-size: 18px;
+        }
+
+        .products-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 32px;
+        }
+
+        @media (max-width: 968px) {
+            .products-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============== MOBILE FILTER TOGGLE ============== */
+        .filter-toggle-mobile {
+            display: none;
+            width: 100%;
+            padding: 14px 20px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 20px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .filter-toggle-mobile svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        @media (max-width: 968px) {
+            .filter-toggle-mobile {
+                display: flex;
+            }
+
+            .filter-sidebar {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 1000;
+                background: white;
+                padding: 20px;
+                overflow-y: auto;
+            }
+
+            .filter-sidebar.active {
+                display: block;
+            }
+
+            .filter-close-mobile {
+                display: flex !important;
+            }
+        }
+
+        /* ============== FILTER SIDEBAR ============== */
+        .filter-sidebar {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .filter-header h3 {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .filter-clear {
+            color: #3b82f6;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .filter-clear:hover {
+            text-decoration: underline;
+        }
+
+        .filter-close-mobile {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: #f1f5f9;
+            border-radius: 10px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ============== FILTER GROUP ============== */
+        .filter-group {
+            margin-bottom: 24px;
+        }
+
+        .filter-group-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 8px 0;
+        }
+
+        .filter-group-header h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #475569;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-group-header svg {
+            width: 16px;
+            height: 16px;
+            color: #94a3b8;
+            transition: transform 0.2s;
+        }
+
+        .filter-group.collapsed .filter-group-header svg {
+            transform: rotate(-90deg);
+        }
+
+        .filter-group.collapsed .filter-group-content {
+            display: none;
+        }
+
+        .filter-group-content {
+            padding-top: 12px;
+        }
+
+        /* ============== CHECKBOX FILTERS ============== */
+        .filter-option {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            cursor: pointer;
+        }
+
+        .filter-option input {
+            display: none;
+        }
+
+        .filter-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #cbd5e1;
+            border-radius: 6px;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .filter-option:hover .filter-checkbox {
+            border-color: #3b82f6;
+        }
+
+        .filter-option input:checked + .filter-checkbox {
+            background: #3b82f6;
+            border-color: #3b82f6;
+        }
+
+        .filter-option input:checked + .filter-checkbox::after {
+            content: "✓";
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .filter-label {
+            font-size: 15px;
+            color: #334155;
+            flex-grow: 1;
+        }
+
+        .filter-count {
+            font-size: 13px;
+            color: #94a3b8;
+            background: #f1f5f9;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        /* ============== COLOR SWATCHES ============== */
+        .color-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding-top: 8px;
+        }
+
+        .color-swatch {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.1);
+        }
+
+        .color-swatch.selected {
+            border-color: #3b82f6;
+        }
+
+        .color-swatch.selected::after {
+            content: "✓";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .color-white { background: #ffffff; border: 2px solid #e2e8f0 !important; }
+        .color-silver { background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%); }
+        .color-black { background: #1e293b; }
+        .color-gold { background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%); }
+
+        /* ============== RANGE SLIDER ============== */
+        .range-slider-container {
+            padding: 16px 0 8px;
+        }
+
+        .range-values {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .range-value {
+            background: #f1f5f9;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .range-slider {
+            width: 100%;
+            height: 6px;
+            -webkit-appearance: none;
+            background: #e2e8f0;
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #3b82f6;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(59, 130, 246, 0.4);
+        }
+
+        /* ============== ENERGY CLASS BADGES ============== */
+        .energy-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding-top: 8px;
+        }
+
+        .energy-badge {
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .energy-badge:hover {
+            transform: translateY(-2px);
+        }
+
+        .energy-badge.selected {
+            border-color: #1e293b;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .energy-a3 { background: #22c55e; color: white; }
+        .energy-a2 { background: #84cc16; color: white; }
+        .energy-a1 { background: #eab308; color: white; }
+        .energy-a { background: #f97316; color: white; }
+        .energy-b { background: #ef4444; color: white; }
+
+        /* ============== PRICE RANGE PILLS ============== */
+        .price-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .price-pill {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .price-pill:hover {
+            border-color: #3b82f6;
+            background: #f0f9ff;
+        }
+
+        .price-pill.selected {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+
+        .price-pill input {
+            display: none;
+        }
+
+        .price-radio {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #cbd5e1;
+            border-radius: 50%;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .price-pill.selected .price-radio {
+            border-color: #3b82f6;
+        }
+
+        .price-pill.selected .price-radio::after {
+            content: "";
+            width: 10px;
+            height: 10px;
+            background: #3b82f6;
+            border-radius: 50%;
+        }
+
+        .price-label {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* ============== INSTALLATION TYPE ============== */
+        .install-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .install-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px 12px;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .install-option:hover {
+            border-color: #3b82f6;
+        }
+
+        .install-option.selected {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+
+        .install-option input {
+            display: none;
+        }
+
+        .install-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .install-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        /* ============== ACTIVE FILTERS ============== */
+        .active-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .active-filter-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #1d4ed8;
+        }
+
+        .active-filter-tag button {
+            background: none;
+            border: none;
+            color: #3b82f6;
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 1;
+            padding: 0;
+        }
+
+        .active-filter-tag button:hover {
+            color: #1d4ed8;
+        }
+
+        /* ============== RESULTS HEADER ============== */
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .results-count {
+            font-size: 16px;
+            color: #64748b;
+        }
+
+        .results-count strong {
+            color: #0f172a;
+        }
+
+        .sort-dropdown {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sort-dropdown label {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .sort-dropdown select {
+            padding: 10px 36px 10px 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+
+        /* ============== PRODUCT GRID ============== */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        @media (max-width: 1200px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============== PRODUCT CARD ============== */
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            position: relative;
+            aspect-ratio: 4/3;
+            background: #f1f5f9;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-badges {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .badge-new { background: #3b82f6; color: white; }
+        .badge-sale { background: #ef4444; color: white; }
+        .badge-eco { background: #22c55e; color: white; }
+
+        .product-energy {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .product-content {
+            padding: 20px;
+        }
+
+        .product-brand {
+            font-size: 12px;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .product-specs {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .product-spec {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .product-spec svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-price {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .product-price-old {
+            font-size: 14px;
+            color: #94a3b8;
+            text-decoration: line-through;
+            margin-right: 8px;
+        }
+
+        .product-btn {
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .product-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+
+        /* ============== EMPTY STATE ============== */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .empty-state h3 {
+            font-size: 20px;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            color: #64748b;
+            margin-bottom: 24px;
+        }
+
+        .empty-state button {
+            padding: 12px 24px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* ============== PAGINATION ============== */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 40px;
+        }
+
+        .pagination-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            background: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .pagination-btn:hover {
+            border-color: #3b82f6;
+            color: #3b82f6;
+        }
+
+        .pagination-btn.active {
+            background: #3b82f6;
+            border-color: #3b82f6;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- ============== PRODUCTS SECTION ============== -->
+    <section class="products-section" fs-cmsfilter-element="filters">
+        <div class="section-header">
+            <h1>Klimatizácie a vzduchotechnika</h1>
+            <p>Vyberte si z našej ponuky prémiových klimatizácií</p>
+        </div>
+
+        <!-- Mobile Filter Toggle -->
+        <button class="filter-toggle-mobile" onclick="toggleMobileFilter()">
+            <span>Filtrovať produkty</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+            </svg>
+        </button>
+
+        <div class="products-layout">
+            <!-- ============== FILTER SIDEBAR ============== -->
+            <aside class="filter-sidebar" id="filter-sidebar">
+                <div class="filter-header">
+                    <h3>Filtre</h3>
+                    <button class="filter-clear" fs-cmsfilter-element="clear">Vymazať všetko</button>
+                    <button class="filter-close-mobile" onclick="toggleMobileFilter()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Kategória -->
+                <div class="filter-group">
+                    <div class="filter-group-header" onclick="toggleFilterGroup(this)">
+                        <h4>Kategória</h4>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="filter-group-content">
+                        <label class="filter-option">
+                            <input type="checkbox" fs-cmsfilter-field="category" value="Klimatizácie">
+                            <span class="filter-checkbox"></span>
+                            <span class="filter-label">Klimatizácie</span>
+                            <span class="filter-count">24</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" fs-cmsfilter-field="category" value="Tepelné čerpadlá">
+                            <span class="filter-checkbox"></span>
+                            <span class="filter-label">Tepelné čerpadlá</span>
+                            <span class="filter-count">12</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" fs-cmsfilter-field="category" value="Vzduchotechnika">
+                            <span class="filter-checkbox"></span>
+                            <span class="filter-label">Vzduchotechnika</span>
+                            <span class="filter-count">8</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Značka -->
+                <div class="filter-group">
+                    <div class="filter-group-header" onclick="toggleFilterGroup(this)">
+                        <h4>Značka</h4>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="filter-group-content">
+                        <label class="filter-option">
+                            <input type="checkbox" fs-cmsfilter-field="brand-ref" value="Daikin">
+                            <span class="filter-checkbox"></span>
+                            <span class="filter-label">Daikin</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" fs-cmsfilter-field="brand-ref" value="Mitsubishi">
+                            <span class="filter-checkbox"></span>
+                            <span class="filter-label">Mitsubishi</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" fs-cmsfilter-field="brand-ref" value="LG">
+                            <span class="filter-checkbox"></span>
+                            <span class="filter-label">LG</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" fs-cmsfilter-field="brand-ref" value="Samsung">
+                            <span class="filter-checkbox"></span>
+                            <span class="filter-label">Samsung</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" fs-cmsfilter-field="brand-ref" value="Toshiba">
+                            <span class="filter-checkbox"></span>
+                            <span class="filter-label">Toshiba</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Farba -->
+                <div class="filter-group">
+                    <div class="filter-group-header" onclick="toggleFilterGroup(this)">
+                        <h4>Farba</h4>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="filter-group-content">
+                        <div class="color-options">
+                            <div class="color-swatch color-white" fs-cmsfilter-field="color" data-value="Biela" title="Biela" onclick="toggleColor(this)"></div>
+                            <div class="color-swatch color-silver" fs-cmsfilter-field="color" data-value="Strieborná" title="Strieborná" onclick="toggleColor(this)"></div>
+                            <div class="color-swatch color-black" fs-cmsfilter-field="color" data-value="Čierna" title="Čierna" onclick="toggleColor(this)"></div>
+                            <div class="color-swatch color-gold" fs-cmsfilter-field="color" data-value="Zlatá" title="Zlatá" onclick="toggleColor(this)"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Výkon kW -->
+                <div class="filter-group">
+                    <div class="filter-group-header" onclick="toggleFilterGroup(this)">
+                        <h4>Výkon (kW)</h4>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="filter-group-content">
+                        <div class="range-slider-container">
+                            <div class="range-values">
+                                <span class="range-value" id="kw-min">2.5 kW</span>
+                                <span class="range-value" id="kw-max">7.0 kW</span>
+                            </div>
+                            <input type="range" class="range-slider" fs-cmsfilter-field="kW" min="2.5" max="10" step="0.5" value="7" oninput="updateKwRange(this)">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Energetická trieda -->
+                <div class="filter-group">
+                    <div class="filter-group-header" onclick="toggleFilterGroup(this)">
+                        <h4>Energetická trieda</h4>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="filter-group-content">
+                        <div class="energy-options">
+                            <div class="energy-badge energy-a3" fs-cmsfilter-field="energy-class" data-value="A+++" onclick="toggleEnergy(this)">A+++</div>
+                            <div class="energy-badge energy-a2" fs-cmsfilter-field="energy-class" data-value="A++" onclick="toggleEnergy(this)">A++</div>
+                            <div class="energy-badge energy-a1" fs-cmsfilter-field="energy-class" data-value="A+" onclick="toggleEnergy(this)">A+</div>
+                            <div class="energy-badge energy-a" fs-cmsfilter-field="energy-class" data-value="A" onclick="toggleEnergy(this)">A</div>
+                            <div class="energy-badge energy-b" fs-cmsfilter-field="energy-class" data-value="B" onclick="toggleEnergy(this)">B</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cenový rozsah -->
+                <div class="filter-group">
+                    <div class="filter-group-header" onclick="toggleFilterGroup(this)">
+                        <h4>Cena</h4>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="filter-group-content">
+                        <div class="price-options">
+                            <label class="price-pill" onclick="selectPrice(this)">
+                                <input type="radio" name="price" fs-cmsfilter-field="price-range" value="do 1000€">
+                                <span class="price-radio"></span>
+                                <span class="price-label">do 1 000 €</span>
+                            </label>
+                            <label class="price-pill" onclick="selectPrice(this)">
+                                <input type="radio" name="price" fs-cmsfilter-field="price-range" value="1000-1500€">
+                                <span class="price-radio"></span>
+                                <span class="price-label">1 000 € - 1 500 €</span>
+                            </label>
+                            <label class="price-pill" onclick="selectPrice(this)">
+                                <input type="radio" name="price" fs-cmsfilter-field="price-range" value="1500-2000€">
+                                <span class="price-radio"></span>
+                                <span class="price-label">1 500 € - 2 000 €</span>
+                            </label>
+                            <label class="price-pill" onclick="selectPrice(this)">
+                                <input type="radio" name="price" fs-cmsfilter-field="price-range" value="nad 2000€">
+                                <span class="price-radio"></span>
+                                <span class="price-label">nad 2 000 €</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Typ inštalácie -->
+                <div class="filter-group">
+                    <div class="filter-group-header" onclick="toggleFilterGroup(this)">
+                        <h4>Typ inštalácie</h4>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="filter-group-content">
+                        <div class="install-options">
+                            <label class="install-option" onclick="selectInstall(this)">
+                                <input type="checkbox" fs-cmsfilter-field="installation-type" value="Nástenná">
+                                <div class="install-icon">🏠</div>
+                                <span class="install-label">Nástenná</span>
+                            </label>
+                            <label class="install-option" onclick="selectInstall(this)">
+                                <input type="checkbox" fs-cmsfilter-field="installation-type" value="Kazetová">
+                                <div class="install-icon">🔲</div>
+                                <span class="install-label">Kazetová</span>
+                            </label>
+                            <label class="install-option" onclick="selectInstall(this)">
+                                <input type="checkbox" fs-cmsfilter-field="installation-type" value="Podstropná">
+                                <div class="install-icon">📐</div>
+                                <span class="install-label">Podstropná</span>
+                            </label>
+                            <label class="install-option" onclick="selectInstall(this)">
+                                <input type="checkbox" fs-cmsfilter-field="installation-type" value="Parapetná">
+                                <div class="install-icon">🪟</div>
+                                <span class="install-label">Parapetná</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- ============== PRODUCTS MAIN ============== -->
+            <main class="products-main">
+                <!-- Active Filters Tags -->
+                <div class="active-filters" fs-cmsfilter-element="filters-active">
+                    <!-- Dynamically populated -->
+                </div>
+
+                <!-- Results Header -->
+                <div class="results-header">
+                    <div class="results-count">
+                        Nájdených <strong fs-cmsfilter-element="results-count">44</strong> produktov
+                    </div>
+                    <div class="sort-dropdown">
+                        <label for="sort">Zoradiť:</label>
+                        <select id="sort" fs-cmsfilter-element="sort">
+                            <option value="popular">Najobľúbenejšie</option>
+                            <option value="price-asc">Cena: od najnižšej</option>
+                            <option value="price-desc">Cena: od najvyššej</option>
+                            <option value="name-asc">Názov: A-Z</option>
+                            <option value="newest">Najnovšie</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="products-grid" fs-cmsfilter-element="list">
+
+                    <!-- Product Card 1 -->
+                    <article class="product-card">
+                        <div class="product-image">
+                            <img src="https://placehold.co/400x300/f1f5f9/64748b?text=Daikin+Perfera" alt="Daikin Perfera">
+                            <div class="product-badges">
+                                <span class="badge badge-new">Novinka</span>
+                            </div>
+                            <span class="product-energy energy-a3">A+++</span>
+                        </div>
+                        <div class="product-content">
+                            <div class="product-brand">Daikin</div>
+                            <h3 class="product-name">Perfera FTXM35R / RXM35R</h3>
+                            <div class="product-specs">
+                                <span class="product-spec">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                    3.5 kW
+                                </span>
+                                <span class="product-spec">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                                    35-45 m²
+                                </span>
+                            </div>
+                            <div class="product-footer">
+                                <div class="product-price">1 590 €</div>
+                                <button class="product-btn">Detail</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Product Card 2 -->
+                    <article class="product-card">
+                        <div class="product-image">
+                            <img src="https://placehold.co/400x300/f1f5f9/64748b?text=Mitsubishi+MSZ" alt="Mitsubishi MSZ-LN">
+                            <div class="product-badges">
+                                <span class="badge badge-eco">Eko</span>
+                            </div>
+                            <span class="product-energy energy-a3">A+++</span>
+                        </div>
+                        <div class="product-content">
+                            <div class="product-brand">Mitsubishi</div>
+                            <h3 class="product-name">MSZ-LN35VG Designer</h3>
+                            <div class="product-specs">
+                                <span class="product-spec">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                    3.5 kW
+                                </span>
+                                <span class="product-spec">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                                    35-45 m²
+                                </span>
+                            </div>
+                            <div class="product-footer">
+                                <div class="product-price">1 890 €</div>
+                                <button class="product-btn">Detail</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Product Card 3 -->
+                    <article class="product-card">
+                        <div class="product-image">
+                            <img src="https://placehold.co/400x300/f1f5f9/64748b?text=LG+Artcool" alt="LG Artcool">
+                            <div class="product-badges">
+                                <span class="badge badge-sale">-15%</span>
+                            </div>
+                            <span class="product-energy energy-a2">A++</span>
+                        </div>
+                        <div class="product-content">
+                            <div class="product-brand">LG</div>
+                            <h3 class="product-name">Artcool Gallery A12FT</h3>
+                            <div class="product-specs">
+                                <span class="product-spec">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                    3.5 kW
+                                </span>
+                                <span class="product-spec">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                                    30-40 m²
+                                </span>
+                            </div>
+                            <div class="product-footer">
+                                <div>
+                                    <span class="product-price-old">1 290 €</span>
+                                    <span class="product-price">1 099 €</span>
+                                </div>
+                                <button class="product-btn">Detail</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Empty State (hidden by default) -->
+                    <div class="empty-state" fs-cmsfilter-element="empty" style="display: none;">
+                        <div class="empty-state-icon">🔍</div>
+                        <h3>Žiadne produkty</h3>
+                        <p>Pre zvolené filtre sme nenašli žiadne produkty. Skúste zmeniť kritériá.</p>
+                        <button fs-cmsfilter-element="clear">Vymazať filtre</button>
+                    </div>
+
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination" fs-cmsfilter-element="pagination">
+                    <button class="pagination-btn">&lt;</button>
+                    <button class="pagination-btn active">1</button>
+                    <button class="pagination-btn">2</button>
+                    <button class="pagination-btn">3</button>
+                    <button class="pagination-btn">&gt;</button>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <script>
+        // Toggle filter groups
+        function toggleFilterGroup(header) {
+            header.closest('.filter-group').classList.toggle('collapsed');
+        }
+
+        // Mobile filter toggle
+        function toggleMobileFilter() {
+            document.getElementById('filter-sidebar').classList.toggle('active');
+        }
+
+        // Color swatch selection
+        function toggleColor(el) {
+            el.classList.toggle('selected');
+        }
+
+        // Energy badge selection
+        function toggleEnergy(el) {
+            el.classList.toggle('selected');
+        }
+
+        // Price selection
+        function selectPrice(el) {
+            document.querySelectorAll('.price-pill').forEach(p => p.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+
+        // Install type selection
+        function selectInstall(el) {
+            el.classList.toggle('selected');
+        }
+
+        // kW range update
+        function updateKwRange(slider) {
+            document.getElementById('kw-max').textContent = slider.value + ' kW';
+        }
+    </script>
+</body>
+</html>
