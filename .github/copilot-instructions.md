@@ -43,3 +43,8 @@ Use this as a practical map to build, test, and deploy SmartAir quickly.
 Questions for maintainers
 - Confirm required Python version and dependency pins (`requirements.txt`).
 - Confirm final domains if different from defaults.
+
+## Cross-AI repo governance (SmartAir scope)
+- This repository is `SmartAir`; do not apply MENUMAT-specific governance here.
+- Before coding, verify the task belongs to SmartAir.
+- Required merge approval phrase from owner: "Merge approved".
