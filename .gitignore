@@ -19,6 +19,7 @@ htmlcov/
 .coverage*
 
 # Editors/IDE
+.vscode/
 .idea/
 
 # OS
