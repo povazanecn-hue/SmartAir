@@ -2,24 +2,15 @@
 **Posledná session:** Codex
 
 ### Hotovo
-- [x] Potvrdené: Lovable pushol aplikáciu (React + Vite + Supabase + Tailwind) do správneho repa.
-- [x] `.ai-context/` funguje ako jednotný handoff medzi Claude/Codex session.
-- [x] Canonical repo je premenované na `MENUMAT-MENUMAESTRO-AKTUAL`.
+- [x] Opravené: odstránené MENUMAT-specific inštrukcie zo SmartAir kontextu.
+- [x] Zavedené pravidlo explicitného merge schválenia frázou "Merge approved".
 
 ### Prebieha
-- [ ] Stabilizovať governance režim: žiadny merge bez výslovného owner schválenia.
-- [ ] Zaviesť cloud knowledge guardrails do každodennej práce (Lovable/Codex/Claude).
+- [ ] Udržať čisté oddelenie kontextu medzi `SmartAir` a `MENUMAT` repozitármi.
 
-### Ďalší krok (pre ďalšiu AI — Claude alebo Codex)
-→ Pred akoukoľvek úpravou over posledný Lovable push + stav otvorených PR, potom pokračuj iba cez branch/PR.
+### Ďalší krok (pre ďalšiu AI)
+→ Pred zmenami over, že úloha patrí do SmartAir; ak je o MENUMAT, nepracuj v tomto repo.
 
 ### Dôležité kontexty
-- Canonical repo: `MENUMAT-MENUMAESTRO-AKTUAL`.
-- Pravidlo poradia: **1) Lovable push, 2) Claude/Codex práca**.
-- Pravidlo schválenia: **žiadny merge bez explicitného owner approval**.
-- Na konci každej session je povinná aktualizácia `current-sprint.md`.
-
-
-### Handoff checklist
-- Pred prácou: prečítaj `.ai-context/cloud-knowledge.md`.
-- Po práci: doplň dopad na ostatné AI workflow (ak existuje).
+- Tento `.ai-context/` je platný len pre SmartAir.
+- Merge do `main` len po explicitnom owner schválení: "Merge approved".
