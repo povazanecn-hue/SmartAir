@@ -13,3 +13,8 @@ Jazyk UI: slovenčina. Jazyk kódu: angličtina.
 
 ## Stack
 Pozri CLAUDE.md pre kompletný kontext.
+
+
+## Doppler – správa kľúčov
+Projekt používa Doppler. Príkazy spúšťaj cez `doppler run --`.
+Nikdy nenavrhuj commitovanie .env. GitHub Secrets sú sync z Doppler.
