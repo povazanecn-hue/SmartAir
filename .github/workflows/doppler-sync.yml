@@ -1,0 +1,18 @@
+name: Sync Doppler Secrets to GitHub
+
+on:
+  workflow_dispatch:   # manuálne spustenie z GitHub UI
+  schedule:
+    - cron: '0 6 * * 1'  # každý pondelok o 6:00 UTC
+
+jobs:
+  sync-secrets:
+    name: Doppler → GitHub Secrets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync SmartAir secrets
+        uses: dopplerhq/secrets-fetch-action@v1
+        with:
+          doppler-token: ${{ secrets.DOPPLER_TOKEN }}
+          # Kľúče sa automaticky nastavia ako GitHub Secrets
+          # a sú dostupné pre Codex a ďalšie Actions
