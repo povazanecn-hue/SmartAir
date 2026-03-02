@@ -462,26 +462,24 @@
                 breakdown.push(`Trasa nad 3 m (${extraRoute} bm × 30 €): ${cost.toFixed(0)} €`);
             }
 
+            const wallMaterial = String(answers.wallMaterial || '').toLowerCase();
+            const isConcreteWall = includesAny(wallMaterial, ['betón', 'panel', 'železobetón', 'zelezobeton']);
+
             const extraPenetrations = Math.max(0, parseNumber(answers.extraPenetrations));
             if (extraPenetrations > 0) {
-                const cost = extraPenetrations * 69;
+                const rate = isConcreteWall ? 99 : 69;
+                const cost = extraPenetrations * rate;
                 total += cost;
-                breakdown.push(`Dodatočné prierazy (${extraPenetrations} × 69 €): ${cost.toFixed(0)} €`);
+                const label = isConcreteWall ? 'Jadrový prieraz' : 'Dodatočné prierazy';
+                breakdown.push(`${label} (${extraPenetrations} × ${rate} €): ${cost.toFixed(0)} €`);
             }
 
             const drillingMeters = Math.max(0, parseNumber(answers.drillingMeters));
-            const wallMaterial = String(answers.wallMaterial || '').toLowerCase();
             if (drillingMeters > 0) {
                 const rate = includesAny(wallMaterial, ['betón', 'zelezobeton', 'železobetón']) ? 109 : 59;
                 const cost = drillingMeters * rate;
                 total += cost;
                 breakdown.push(`Drážkovanie (${drillingMeters} bm × ${rate} €): ${cost.toFixed(0)} €`);
-            }
-
-            if (includesAny(answers.wallMaterial, ['betón', 'panel', 'železobetón', 'zelezobeton']) && extraPenetrations > 0) {
-                const cost = extraPenetrations * 99;
-                total += cost;
-                breakdown.push(`Jadrový prieraz (${extraPenetrations} × 99 €): ${cost.toFixed(0)} €`);
             }
 
             if (includesAny(answers.condensateMode, ['s čerpadlom', 'cerpadlo', 'čerpadlo'])) {
