@@ -560,7 +560,7 @@
                 removeTyping(typingId);
 
                 if (data.response) {
-                    addMessage(data.response, 'bot', true);
+                    addMessage(data.response, 'bot', true, true);
                     if (includeInHistory) {
                         conversationHistory.push(
                             { role: 'user', content: text },
@@ -594,15 +594,29 @@
             return `Som tu ako AI sprievodca Dream Air. Pomôžem s výberom modelu, porovnaním značiek aj orientačnou cenou montáže. Ak chcete, môžeme hneď spustiť krokového sprievodcu. Kontakt: ${CONFIG.phone}.`;
         }
 
-        function addMessage(text, type, shouldSpeak = false) {
+        function addMessage(text, type, shouldSpeak = false, allowHtml = false) {
             const div = document.createElement('div');
             div.className = `smartesko-message ${type}`;
+            const normalizedText = String(text ?? '');
 
             if (type === 'bot') {
-                div.innerHTML = `<div class="message-header">🤖 ${CONFIG.assistantName}</div>${text}`;
-                if (shouldSpeak) speakText(text);
+                const header = document.createElement('div');
+                header.className = 'message-header';
+                header.textContent = `🤖 ${CONFIG.assistantName}`;
+
+                const body = document.createElement('div');
+                if (allowHtml) {
+                    body.innerHTML = normalizedText;
+                } else {
+                    body.textContent = normalizedText;
+                }
+
+                div.appendChild(header);
+                div.appendChild(body);
+
+                if (shouldSpeak) speakText(normalizedText);
             } else {
-                div.textContent = text;
+                div.textContent = normalizedText;
             }
 
             messages.appendChild(div);
