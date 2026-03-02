@@ -562,11 +562,9 @@
                 if (data.response) {
                     addMessage(data.response, 'bot', true, true);
                     if (includeInHistory) {
-                        conversationHistory.push(
-                            { role: 'user', content: text },
-                            { role: 'assistant', content: data.response }
-                        );
+                        conversationHistory.push({ role: 'user', content: text });
                     }
+                    conversationHistory.push({ role: 'assistant', content: data.response });
                 } else {
                     addMessage('Prepáčte, nepodarilo sa mi získať odpoveď. Skúste to prosím znova.', 'bot', true);
                 }
