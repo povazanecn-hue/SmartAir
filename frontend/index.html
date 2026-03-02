@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartAir AI Asistent | Inteligentná podpora pre váš biznis</title>
-    <meta name="description" content="SmartAir AI Asistent - automatizovaná zákaznícka podpora 24/7. Zvýšte predaje a ušetrite čas s umelou inteligenciou.">
+    <title>Dream Air | Zákaznícky konfigurátor klimatizácií</title>
+    <meta name="description" content="Dream Air - zákaznícky konfigurátor klimatizácií, porovnanie modelov, cenová ponuka, rezervácia montáže a servisné balíčky Dream Air Care.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Righteous&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -15,27 +15,49 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary: #0ea5e9;
-            --accent: #06b6d4;
-            --dark: #0f172a;
-            --gray: #64748b;
-            --light: #f8fafc;
-            --white: #ffffff;
-            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+          :root {
+            --bg-primary: #082B4A;
+            --bg-secondary: #0D3C66;
+            --bg-tertiary: #0A4B7A;
+            --bg-surface: #1B4F79;
+            --bg-accent: #0E6FB3;
+            --bg-light: #F9EFF6;
+
+            --text-primary: #FFFFFF;
+            --text-muted: rgba(255,255,255,0.82);
+            --text-muted-soft: rgba(255,255,255,0.68);
+            --text-blue: #0E6FB3;
+
+            --shade-medium: #10608F;
+            --shade-darker: #0C4876;
+            --shade-deep: #093F67;
+            --shade-very-deep: #072F4D;
+
+            --accent-blue: #2F80FF;
+            --overlay-subtle: rgba(6, 40, 66, 0.22);
+
+            --font-xs: 9.6px;
+            --font-sm: 11px;
+            --font-body: 14px;
+            --font-lg: 16px;
+            --fw-regular: 400;
+            --fw-semibold: 600;
+            --fw-bold: 700;
+
+            --gradient: linear-gradient(135deg, #2F80FF 0%, #00BDEB 100%);
+            --heading-font: 'Righteous', sans-serif;
+            --body-font: 'Quicksand', -apple-system, Segoe UI, Roboto, Arial, sans-serif;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: var(--body-font);
             line-height: 1.6;
-            color: var(--dark);
-            background: var(--white);
+            color: var(--text-primary);
+            background: var(--bg-primary);
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1120px;
             margin: 0 auto;
             padding: 0 24px;
         }
@@ -46,11 +68,11 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(8, 43, 74, 0.96);
             backdrop-filter: blur(10px);
             z-index: 1000;
-            padding: 16px 0;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
         nav .container {
@@ -60,12 +82,23 @@
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: 800;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-family: var(--heading-font);
+            font-size: 22px;
+            font-weight: var(--fw-bold);
+            color: #FFFFFF;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-blue);
+            box-shadow: 0 0 12px rgba(47,128,255,0.65);
         }
 
         .nav-links {
@@ -76,13 +109,14 @@
 
         .nav-links a {
             text-decoration: none;
-            color: var(--gray);
-            font-weight: 500;
+            color: var(--text-muted);
+            font-weight: var(--fw-semibold);
+            font-size: var(--font-body);
             transition: color 0.3s;
         }
 
         .nav-links a:hover {
-            color: var(--primary);
+            color: var(--text-primary);
         }
 
         .btn {
@@ -91,40 +125,40 @@
             gap: 8px;
             padding: 12px 24px;
             border-radius: 8px;
-            font-weight: 600;
+            font-weight: var(--fw-semibold);
             text-decoration: none;
             transition: all 0.3s;
             cursor: pointer;
             border: none;
-            font-size: 16px;
+            font-size: var(--font-body);
         }
 
         .btn-primary {
             background: var(--gradient);
-            color: var(--white);
-            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+            color: var(--text-primary);
+            box-shadow: 0 6px 18px rgba(47, 128, 255, 0.34);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+            box-shadow: 0 10px 24px rgba(0, 189, 235, 0.35);
         }
 
         .btn-outline {
             background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
+            color: var(--text-primary);
+            border: 2px solid var(--accent-blue);
         }
 
         .btn-outline:hover {
-            background: var(--primary);
-            color: var(--white);
+            background: var(--accent-blue);
+            color: var(--text-primary);
         }
 
         /* Hero Section */
         .hero {
-            padding: 160px 0 100px;
-            background: linear-gradient(180deg, var(--light) 0%, var(--white) 100%);
+            padding: 148px 0 88px;
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
             position: relative;
             overflow: hidden;
         }
@@ -136,20 +170,21 @@
             right: -20%;
             width: 800px;
             height: 800px;
-            background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(0, 189, 235, 0.24) 0%, transparent 70%);
             border-radius: 50%;
         }
 
         .hero .container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            gap: 52px;
             align-items: center;
         }
 
         .hero-content h1 {
-            font-size: 56px;
-            font-weight: 800;
+            font-family: var(--heading-font);
+            font-size: 64px;
+            font-weight: var(--fw-bold);
             line-height: 1.1;
             margin-bottom: 24px;
         }
@@ -162,8 +197,8 @@
         }
 
         .hero-content p {
-            font-size: 20px;
-            color: var(--gray);
+            font-size: var(--font-body);
+            color: var(--text-muted);
             margin-bottom: 32px;
             max-width: 500px;
         }
@@ -178,18 +213,117 @@
             gap: 48px;
             margin-top: 48px;
             padding-top: 48px;
-            border-top: 1px solid rgba(0,0,0,0.1);
+            border-top: 1px solid rgba(255,255,255,0.18);
         }
 
         .stat h3 {
+            font-family: var(--heading-font);
+            letter-spacing: 0.4px;
             font-size: 36px;
-            font-weight: 800;
-            color: var(--primary);
+            font-weight: var(--fw-bold);
+            color: var(--text-primary);
         }
 
         .stat p {
-            color: var(--gray);
-            font-size: 14px;
+            color: var(--text-muted);
+            font-size: var(--font-body);
+        }
+
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .feature-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: #fff;
+            stroke-width: 1.9;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+
+        /* Wizard Steps Concept Section */
+        .wizard-concept {
+            padding: 88px 0;
+            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+        }
+
+        .wizard-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .wizard-card {
+            position: relative;
+            min-height: 220px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.16);
+            box-shadow: 0 12px 28px rgba(5, 30, 52, 0.28);
+            isolation: isolate;
+        }
+
+        .wizard-photo {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.02);
+            filter: saturate(0.92) contrast(1.05);
+        }
+
+        .wizard-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(7,47,77,0.22) 0%, rgba(7,47,77,0.74) 72%);
+            z-index: 1;
+        }
+
+        .wizard-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 18px;
+            gap: 6px;
+        }
+
+        .wizard-step {
+            display: inline-flex;
+            align-self: flex-start;
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.38);
+            background: rgba(255,255,255,0.1);
+            font-size: var(--font-sm);
+            color: #EAF8FF;
+            backdrop-filter: blur(3px);
+        }
+
+        .wizard-card h3 {
+            font-family: var(--heading-font);
+            font-size: 22px;
+            line-height: 1.2;
+        }
+
+        .wizard-card p {
+            font-size: var(--font-body);
+            color: rgba(234,248,255,0.9);
+            max-width: 32ch;
         }
 
         .hero-image {
@@ -199,14 +333,14 @@
         .hero-image img {
             width: 100%;
             border-radius: 16px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            box-shadow: 0 25px 50px rgba(8,61,92,0.36);
         }
 
         .chat-preview {
-            background: var(--white);
+            background: var(--bg-surface);
             border-radius: 16px;
             padding: 24px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            box-shadow: 0 25px 50px rgba(8,61,92,0.36);
             max-width: 450px;
             margin-left: auto;
         }
@@ -217,7 +351,7 @@
             gap: 12px;
             margin-bottom: 20px;
             padding-bottom: 16px;
-            border-bottom: 1px solid var(--light);
+            border-bottom: 1px solid rgba(255,255,255,0.18);
         }
 
         .chat-avatar {
@@ -229,16 +363,16 @@
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: 700;
+            font-weight: var(--fw-bold);
         }
 
         .chat-info h4 {
-            font-weight: 600;
+            font-weight: var(--fw-semibold);
         }
 
         .chat-info span {
-            color: #22c55e;
-            font-size: 14px;
+            color: var(--text-primary);
+            font-size: var(--font-body);
         }
 
         .chat-messages {
@@ -251,23 +385,24 @@
             padding: 12px 16px;
             border-radius: 12px;
             max-width: 85%;
-            font-size: 14px;
+            font-size: var(--font-body);
         }
 
         .message.bot {
-            background: var(--light);
+            background: var(--bg-surface);
             align-self: flex-start;
         }
 
         .message.user {
-            background: var(--primary);
+            background: var(--accent-blue);
             color: white;
             align-self: flex-end;
         }
 
         /* Features Section */
         .features {
-            padding: 100px 0;
+            padding: 88px 0;
+            background: var(--bg-secondary);
         }
 
         .section-header {
@@ -277,14 +412,15 @@
         }
 
         .section-header h2 {
-            font-size: 42px;
-            font-weight: 800;
+            font-family: var(--heading-font);
+            font-size: 56px;
+            font-weight: var(--fw-bold);
             margin-bottom: 16px;
         }
 
         .section-header p {
-            color: var(--gray);
-            font-size: 18px;
+            color: var(--text-muted);
+            font-size: var(--font-body);
         }
 
         .features-grid {
@@ -296,53 +432,43 @@
         .feature-card {
             padding: 32px;
             border-radius: 16px;
-            background: var(--white);
-            border: 1px solid rgba(0,0,0,0.08);
+            background: var(--bg-surface);
+            border: 1px solid rgba(255,255,255,0.12);
             transition: all 0.3s;
         }
 
         .feature-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 40px rgba(8,61,92,0.32);
             border-color: transparent;
         }
 
-        .feature-icon {
-            width: 56px;
-            height: 56px;
-            background: var(--gradient);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
 
         .feature-card h3 {
-            font-size: 20px;
-            font-weight: 700;
+            font-family: var(--heading-font);
+            font-size: var(--font-body);
+            font-weight: var(--fw-bold);
             margin-bottom: 12px;
         }
 
         .feature-card p {
-            color: var(--gray);
-            font-size: 15px;
+            color: var(--text-muted);
+            font-size: var(--font-body);
         }
 
         /* Benefits Section */
         .benefits {
-            padding: 100px 0;
-            background: var(--dark);
-            color: var(--white);
+            padding: 88px 0;
+            background: var(--shade-deep);
+            color: var(--text-primary);
         }
 
         .benefits .section-header h2 {
-            color: var(--white);
+            color: var(--text-primary);
         }
 
         .benefits .section-header p {
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.8);
         }
 
         .benefits-grid {
@@ -357,8 +483,9 @@
         }
 
         .benefit-number {
+            font-family: var(--heading-font);
             font-size: 48px;
-            font-weight: 800;
+            font-weight: var(--fw-bold);
             background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -367,19 +494,20 @@
         }
 
         .benefit-item h4 {
-            font-size: 18px;
+            font-family: var(--heading-font);
+            font-size: var(--font-body);
             margin-bottom: 8px;
         }
 
         .benefit-item p {
-            color: rgba(255,255,255,0.6);
-            font-size: 14px;
+            color: var(--text-muted-soft);
+            font-size: var(--font-body);
         }
 
         /* Pricing Section */
         .pricing {
-            padding: 100px 0;
-            background: var(--light);
+            padding: 88px 0;
+            background: var(--bg-surface);
         }
 
         .pricing-grid {
@@ -391,7 +519,7 @@
         }
 
         .pricing-card {
-            background: var(--white);
+            background: var(--bg-surface);
             border-radius: 20px;
             padding: 40px 32px;
             text-align: center;
@@ -401,12 +529,12 @@
         }
 
         .pricing-card.popular {
-            border-color: var(--primary);
+            border-color: rgba(217,243,255,0.8);
             transform: scale(1.05);
         }
 
         .pricing-card.popular::before {
-            content: 'Najobľúbenejší';
+            content: 'Najobľúbenejšia';
             position: absolute;
             top: -12px;
             left: 50%;
@@ -415,26 +543,28 @@
             color: white;
             padding: 4px 16px;
             border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
+            font-size: var(--font-sm);
+            font-weight: var(--fw-semibold);
         }
 
         .pricing-card h3 {
+            font-family: var(--heading-font);
             font-size: 24px;
-            font-weight: 700;
+            font-weight: var(--fw-bold);
             margin-bottom: 8px;
         }
 
         .pricing-card .price {
+            font-family: var(--heading-font);
             font-size: 48px;
-            font-weight: 800;
+            font-weight: var(--fw-bold);
             margin: 24px 0;
         }
 
         .pricing-card .price span {
-            font-size: 18px;
-            font-weight: 500;
-            color: var(--gray);
+            font-size: var(--font-body);
+            font-weight: var(--fw-semibold);
+            color: var(--text-muted);
         }
 
         .pricing-card ul {
@@ -445,17 +575,17 @@
 
         .pricing-card li {
             padding: 12px 0;
-            border-bottom: 1px solid var(--light);
+            border-bottom: 1px solid rgba(255,255,255,0.18);
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 15px;
+            font-size: var(--font-body);
         }
 
         .pricing-card li::before {
             content: '✓';
-            color: #22c55e;
-            font-weight: 700;
+            color: var(--text-primary);
+            font-weight: var(--fw-bold);
         }
 
         .pricing-card .btn {
@@ -465,57 +595,84 @@
 
         /* CTA Section */
         .cta {
-            padding: 100px 0;
-            background: var(--gradient);
-            text-align: center;
-            color: var(--white);
+            padding: 88px 0;
+            background: linear-gradient(135deg, #0A4B7A 0%, #0D3C66 100%);
+            text-align: left;
+            color: var(--text-primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            right: -40px;
+            top: 10px;
+            width: 360px;
+            height: 220px;
+            opacity: 0.16;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 200'%3E%3Crect x='30' y='55' width='240' height='90' rx='14' fill='none' stroke='%23D9F3FF' stroke-width='4'/%3E%3Ccircle cx='220' cy='100' r='22' fill='none' stroke='%23D9F3FF' stroke-width='4'/%3E%3Cpath d='M198 100h44M220 78v44' stroke='%23D9F3FF' stroke-width='3'/%3E%3Cpath d='M65 88h85M65 102h70M65 116h55' stroke='%23D9F3FF' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .cta .container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
         .cta h2 {
+            font-family: var(--heading-font);
             font-size: 42px;
-            font-weight: 800;
+            font-weight: var(--fw-bold);
             margin-bottom: 16px;
+            max-width: 780px;
         }
 
         .cta p {
-            font-size: 20px;
-            opacity: 0.9;
-            margin-bottom: 32px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            font-size: var(--font-body);
+            opacity: 0.92;
+            margin-bottom: 28px;
+            max-width: 760px;
+            margin-left: 0;
+            margin-right: 0;
         }
 
         .cta .btn {
-            background: var(--white);
-            color: var(--primary);
+            background: rgba(255,255,255,0.14);
+            border: 1px solid rgba(255,255,255,0.32);
+            color: var(--text-primary);
         }
 
         .cta .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(10,69,116,0.3);
         }
 
         /* Contact Form */
         .contact {
-            padding: 100px 0;
+            padding: 88px 0;
+            background: var(--shade-deep);
         }
 
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            gap: 52px;
             align-items: center;
         }
 
         .contact-info h2 {
+            font-family: var(--heading-font);
             font-size: 36px;
-            font-weight: 800;
+            font-weight: var(--fw-bold);
             margin-bottom: 16px;
         }
 
         .contact-info p {
-            color: var(--gray);
+            color: var(--text-muted);
             margin-bottom: 32px;
         }
 
@@ -534,16 +691,86 @@
         .contact-item .icon {
             width: 48px;
             height: 48px;
-            background: var(--light);
             border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.24);
+            background: rgba(255,255,255,0.06);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            color: transparent;
+            position: relative;
+        }
+
+        .contact-item .icon::before {
+            content: '';
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.42);
+            background: rgba(255,255,255,0.04);
+        }
+
+
+        .contact-item:nth-child(1) .icon::before {
+            width: 18px;
+            height: 12px;
+            border-radius: 3px;
+            border: 1.2px solid rgba(255,255,255,0.55);
+            background: transparent;
+            box-shadow: none;
+        }
+        .contact-item:nth-child(1) .icon::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 7px;
+            border-left: 1.2px solid rgba(255,255,255,0.55);
+            border-bottom: 1.2px solid rgba(255,255,255,0.55);
+            transform: rotate(-45deg) translate(1px, -2px);
+            top: 19px;
+            left: 17px;
+        }
+
+        .contact-item:nth-child(2) .icon::before {
+            width: 8px;
+            height: 14px;
+            border-radius: 3px;
+            border: 1.2px solid rgba(255,255,255,0.55);
+            background: transparent;
+            box-shadow: none;
+        }
+        .contact-item:nth-child(2) .icon::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 2px;
+            border-radius: 1px;
+            background: rgba(255,255,255,0.45);
+            bottom: 14px;
+            left: 19px;
+        }
+
+        .contact-item:nth-child(3) .icon::before {
+            width: 10px;
+            height: 10px;
+            border-radius: 50% 50% 50% 0;
+            border: 1.2px solid rgba(255,255,255,0.55);
+            transform: rotate(-45deg);
+            background: transparent;
+            box-shadow: none;
+        }
+        .contact-item:nth-child(3) .icon::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.55);
         }
 
         .contact-form {
-            background: var(--light);
+            background: rgba(217,243,255,0.10);
             padding: 40px;
             border-radius: 20px;
         }
@@ -555,7 +782,7 @@
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 500;
+            font-weight: var(--fw-semibold);
         }
 
         .form-group input,
@@ -563,9 +790,9 @@
         .form-group select {
             width: 100%;
             padding: 14px 16px;
-            border: 1px solid rgba(0,0,0,0.1);
+            border: 1px solid rgba(217,243,255,0.38);
             border-radius: 8px;
-            font-size: 16px;
+            font-size: var(--font-body);
             font-family: inherit;
             transition: border-color 0.3s;
         }
@@ -574,7 +801,7 @@
         .form-group textarea:focus,
         .form-group select:focus {
             outline: none;
-            border-color: var(--primary);
+            border-color: rgba(217,243,255,0.8);
         }
 
         .form-group textarea {
@@ -582,33 +809,81 @@
             min-height: 120px;
         }
 
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            background: rgba(232, 246, 255, 0.14);
+            color: #F4FBFF;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(231, 246, 255, 0.62);
+        }
+
         /* Footer */
         footer {
-            background: var(--dark);
-            color: var(--white);
-            padding: 60px 0 30px;
+            background: linear-gradient(180deg, #0A4B7A 0%, #072F4D 100%);
+            color: var(--text-primary);
+            padding: 72px 0 30px;
+            border-top: 1px solid rgba(0,189,235,0.25);
+        }
+
+        .footer-highlight {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 14px;
+            padding: 18px 20px;
+            margin-bottom: 36px;
+        }
+
+        .footer-highlight p {
+            font-size: var(--font-body);
+            color: var(--text-muted);
         }
 
         .footer-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 48px;
-            margin-bottom: 48px;
+            grid-template-columns: 1.6fr 1fr 1fr 1fr;
+            gap: 36px;
+            margin-bottom: 40px;
         }
 
         .footer-brand .logo {
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             display: inline-block;
         }
 
         .footer-brand p {
-            color: rgba(255,255,255,0.6);
-            font-size: 14px;
+            color: var(--text-muted-soft);
+            font-size: var(--font-body);
+            margin-bottom: 14px;
+        }
+
+        .footer-meta {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .footer-chip {
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.14);
+            font-size: var(--font-sm);
+            color: var(--text-muted);
         }
 
         footer h4 {
-            font-size: 16px;
-            margin-bottom: 20px;
+            font-family: var(--heading-font);
+            font-size: var(--font-body);
+            margin-bottom: 14px;
         }
 
         footer ul {
@@ -616,26 +891,26 @@
         }
 
         footer ul li {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         footer ul a {
-            color: rgba(255,255,255,0.6);
+            color: var(--text-muted-soft);
             text-decoration: none;
             transition: color 0.3s;
-            font-size: 14px;
+            font-size: var(--font-body);
         }
 
         footer ul a:hover {
-            color: var(--white);
+            color: #BEEBFF;
         }
 
         .footer-bottom {
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.12);
             text-align: center;
-            color: rgba(255,255,255,0.5);
-            font-size: 14px;
+            color: rgba(255,255,255,0.62);
+            font-size: var(--font-body);
         }
 
         /* Responsive */
@@ -650,12 +925,18 @@
             }
 
             .features-grid,
-            .pricing-grid {
+            .pricing-grid,
+            .wizard-grid {
                 grid-template-columns: 1fr;
             }
 
             .benefits-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-highlight {
+                flex-direction: column;
+                align-items: flex-start;
             }
 
             .footer-grid {
@@ -680,6 +961,13 @@
                 flex-direction: column;
             }
 
+            .cta::before {
+                width: 250px;
+                right: -70px;
+                top: 22px;
+                opacity: 0.12;
+            }
+
             .hero-stats {
                 flex-direction: column;
                 gap: 24px;
@@ -699,14 +987,14 @@
     <!-- Navigation -->
     <nav>
         <div class="container">
-            <a href="#" class="logo">SmartAir AI</a>
+            <a href="#" class="logo">Dream Air</a>
             <ul class="nav-links">
-                <li><a href="#features">Funkcie</a></li>
+                <li><a href="#features">Konfigurátor</a></li>
                 <li><a href="#benefits">Výhody</a></li>
-                <li><a href="#pricing">Cenník</a></li>
+                <li><a href="#pricing">Cenové triedy</a></li>
                 <li><a href="#contact">Kontakt</a></li>
             </ul>
-            <a href="#contact" class="btn btn-primary">Vyskúšať zadarmo</a>
+            <a href="#contact" class="btn btn-primary">Získať cenovú ponuku</a>
         </div>
     </nav>
 
@@ -714,44 +1002,152 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Váš <span>AI Asistent</span> pre zákaznícku podporu</h1>
-                <p>Automatizujte zákaznícku podporu s inteligentným AI asistentom. Odpovedajte na otázky 24/7, zvyšujte predaje a ušetrite až 70% nákladov.</p>
+                <h1>Váš <span>eCommerce konfigurátor</span> klimatizácií</h1>
+                <p>Zlaďte predaj klimatizácií do štýlu Webflow Ecomm Standard: lifestyle katalóg, porovnanie modelov, cenová ponuka v EUR, rezervácia montáže a Dream Air Care balíčky.</p>
                 <div class="hero-buttons">
-                    <a href="#contact" class="btn btn-primary">Začať zadarmo</a>
+                    <a href="#contact" class="btn btn-primary">Spustiť konfigurátor</a>
                     <a href="#features" class="btn btn-outline">Zistiť viac</a>
                 </div>
                 <div class="hero-stats">
                     <div class="stat">
                         <h3>95%</h3>
-                        <p>Spokojnosť zákazníkov</p>
+                        <p>Spokojnosť zákazníkov s montážou</p>
                     </div>
                     <div class="stat">
                         <h3>24/7</h3>
-                        <p>Dostupnosť non-stop</p>
+                        <p>Dostupnosť termínov</p>
                     </div>
                     <div class="stat">
                         <h3>70%</h3>
-                        <p>Úspora nákladov</p>
+                        <p>Úspora energie</p>
                     </div>
                 </div>
             </div>
             <div class="hero-image">
                 <div class="chat-preview">
                     <div class="chat-header">
-                        <div class="chat-avatar">AI</div>
+                        <div class="chat-avatar">DA</div>
                         <div class="chat-info">
-                            <h4>SmartAir Asistent</h4>
+                            <h4>Dream Air Konfigurátor</h4>
                             <span>● Online</span>
                         </div>
                     </div>
                     <div class="chat-messages">
-                        <div class="message bot">Dobrý deň! Som váš AI asistent. Ako vám môžem pomôcť?</div>
-                        <div class="message user">Aké máte dostupné produkty?</div>
-                        <div class="message bot">Máme široký sortiment produktov. Môžem vám odporučiť na základe vašich potrieb. Čo presne hľadáte?</div>
-                        <div class="message user">Potrebujem niečo pre malú kanceláriu</div>
-                        <div class="message bot">Pre malú kanceláriu odporúčam náš SmartAir Compact. Je tichý, efektívny a ideálny pre priestory do 30m².</div>
+                        <div class="message bot">Dobrý deň! Pomôžem vám vybrať správnu klimatizáciu podľa plochy a rozpočtu.</div>
+                        <div class="message user">Chcem klimatizáciu pre byt 55 m²</div>
+                        <div class="message bot">Odporúčam výkon 12 000 BTU. Preferujete ekonomickú, strednú alebo prémiovú triedu?</div>
+                        <div class="message user">Chcem aj predĺženú záruku a servis</div>
+                        <div class="message bot">Skvelé, k ponuke pridám Dream Air Care Comfort (+3 roky záruky) a zobrazím voľné termíny montáže.</div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wizard Steps Concept Section -->
+    <section class="wizard-concept" id="wizard-concept">
+        <div class="container">
+            <div class="section-header">
+                <h2>Konfigurátor: 12 po sebe idúcich krokov</h2>
+                <p>Presný zákaznícky flow od vstupného výberu až po potvrdenie objednávky, rezerváciu montáže a odovzdanie podkladov technikovi.</p>
+            </div>
+            <div class="wizard-grid">
+                <article class="wizard-card">
+                    <div class="wizard-photo" style="background-image:url('https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="wizard-content">
+                        <span class="wizard-step">Krok 1/12</span>
+                        <h3>Úvodný katalóg tried</h3>
+                        <p>Výber: ekonomická, stredná, prémiová alebo luxusná trieda.</p>
+                    </div>
+                </article>
+                <article class="wizard-card">
+                    <div class="wizard-photo" style="background-image:url('https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="wizard-content">
+                        <span class="wizard-step">Krok 2/12</span>
+                        <h3>Typ priestoru</h3>
+                        <p>Byt, dom alebo firemný priestor + účel používania.</p>
+                    </div>
+                </article>
+                <article class="wizard-card">
+                    <div class="wizard-photo" style="background-image:url('https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="wizard-content">
+                        <span class="wizard-step">Krok 3/12</span>
+                        <h3>Plocha a dispozícia</h3>
+                        <p>Zadanie m², výšky stropu a orientácie okien.</p>
+                    </div>
+                </article>
+                <article class="wizard-card">
+                    <div class="wizard-photo" style="background-image:url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="wizard-content">
+                        <span class="wizard-step">Krok 4/12</span>
+                        <h3>Výpočet výkonu BTU</h3>
+                        <p>Automatický návrh výkonu podľa podmienok priestoru.</p>
+                    </div>
+                </article>
+                <article class="wizard-card">
+                    <div class="wizard-photo" style="background-image:url('https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="wizard-content">
+                        <span class="wizard-step">Krok 5/12</span>
+                        <h3>Parametre komfortu</h3>
+                        <p>Hlučnosť, SEER/EER, smart funkcie, chladivo, kompresor.</p>
+                    </div>
+                </article>
+                <article class="wizard-card">
+                    <div class="wizard-photo" style="background-image:url('https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="wizard-content">
+                        <span class="wizard-step">Krok 6/12</span>
+                        <h3>Výber značiek</h3>
+                        <p>Daikin, Midea, Samsung, Vivax, TCL a ďalšie značky.</p>
+                    </div>
+                </article>
+                <article class="wizard-card">
+                    <div class="wizard-photo" style="background-image:url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="wizard-content">
+                        <span class="wizard-step">Krok 7/12</span>
+                        <h3>Porovnanie modelov</h3>
+                        <p>Tabuľka výkonu, spotreby, ceny a úrovne hlučnosti.</p>
+                    </div>
+                </article>
+                <article class="wizard-card">
+                    <div class="wizard-photo" style="background-image:url('https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="wizard-content">
+                        <span class="wizard-step">Krok 8/12</span>
+                        <h3>Dream Air Care balíčky</h3>
+                        <p>Výber Basic / Comfort / Premium s predĺženou zárukou.</p>
+                    </div>
+                </article>
+                <article class="wizard-card">
+                    <div class="wizard-photo" style="background-image:url('https://images.unsplash.com/photo-1590736969955-71cc94901144?auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="wizard-content">
+                        <span class="wizard-step">Krok 9/12</span>
+                        <h3>Cenová ponuka v EUR</h3>
+                        <p>Rozpis položiek vrátane montáže, DPH a služieb.</p>
+                    </div>
+                </article>
+                <article class="wizard-card">
+                    <div class="wizard-photo" style="background-image:url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="wizard-content">
+                        <span class="wizard-step">Krok 10/12</span>
+                        <h3>Montážny dotazník</h3>
+                        <p>Technické vstupy + nahratie fotky miesta inštalácie.</p>
+                    </div>
+                </article>
+                <article class="wizard-card">
+                    <div class="wizard-photo" style="background-image:url('https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="wizard-content">
+                        <span class="wizard-step">Krok 11/12</span>
+                        <h3>Rezervácia a záloha</h3>
+                        <p>Výber termínu montáže a potvrdenie online platby.</p>
+                    </div>
+                </article>
+                <article class="wizard-card">
+                    <div class="wizard-photo" style="background-image:url('https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="wizard-content">
+                        <span class="wizard-step">Krok 12/12</span>
+                        <h3>Potvrdenie a PDF</h3>
+                        <p>Finálny súhrn, PDF ponuka a odoslanie detailov emailom.</p>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
@@ -760,71 +1156,70 @@
     <section class="features" id="features">
         <div class="container">
             <div class="section-header">
-                <h2>Prečo SmartAir AI?</h2>
-                <p>Moderné riešenie pre firmy, ktoré chcú byť o krok vpred pred konkurenciou</p>
+                <h2>Prečo Dream Air zákaznícky konfigurátor?</h2>
+                <p>Ecomm štýl zladený s Webflow stránkou, pripravený na predaj klimatizácií</p>
             </div>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
-                    <h3>Inteligentné odpovede</h3>
-                    <p>AI sa učí z vašich produktov a služieb. Odpovedá presne a relevantne na otázky zákazníkov.</p>
+                    <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 4v3"/><path d="M9 12h.01"/><path d="M15 12h.01"/><path d="M9 16h6"/></svg></div>
+                    <h3>Inteligentné odporúčanie modelu</h3>
+                    <p>Výpočet odporúčaného výkonu podľa m², izolácie a orientácie miestnosti.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Okamžitá reakcia</h3>
-                    <p>Žiadne čakanie. Zákazníci dostanú odpoveď do 2 sekúnd, 24 hodín denne, 7 dní v týždni.</p>
+                    <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg></div>
+                    <h3>Rýchla cenová ponuka</h3>
+                    <p>Automatický rozpis ceny zariadenia, montáže, DPH a servisného balíčka.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h3>Personalizácia</h3>
-                    <p>AI si pamätá preferencie zákazníkov a prispôsobuje odpovede ich potrebám.</p>
+                    <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg></div>
+                    <h3>Dream Air Care balíčky</h3>
+                    <p>Basic, Comfort a Premium balíčky s predĺženou zárukou priamo v košíku.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>Analytika a reporty</h3>
-                    <p>Detailné štatistiky o konverzáciách, najčastejších otázkach a spokojnosti zákazníkov.</p>
+                    <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20V8"/><path d="M10 20V4"/><path d="M16 20v-6"/><path d="M22 20H2"/></svg></div>
+                    <h3>Porovnanie modelov</h3>
+                    <p>Prehľad BTU, SEER, hlučnosti, chladiva, Wi-Fi funkcií a ceny na jednej obrazovke.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🔗</div>
-                    <h3>Jednoduchá integrácia</h3>
-                    <p>Pripojte AI asistenta na váš web, Facebook, Instagram alebo WhatsApp za pár minút.</p>
+                    <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 1 0-7l1.5-1.5a5 5 0 0 1 7 7L17 13"/><path d="M14 11a5 5 0 0 1 0 7L12.5 19.5a5 5 0 0 1-7-7L7 11"/></svg></div>
+                    <h3>Katalóg značiek na výber</h3>
+                    <p>Vyberajte z ponuky značiek Daikin, Midea, Samsung, Vivax, TCL a ďalších v prehľadnom katalógu.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🛡️</div>
-                    <h3>Bezpečnosť dát</h3>
-                    <p>GDPR compliant. Vaše dáta sú šifrované a chránené podľa najvyšších štandardov.</p>
+                    <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5.2 3.4 8.7 8 10 4.6-1.3 8-4.8 8-10V6z"/><path d="M9 12h6"/></svg></div>
+                    <h3>Rezervácia a záloha online</h3>
+                    <p>Výber termínu montáže a online úhrada zálohy so súladom s GDPR.</p>
                 </div>
             </div>
         </div>
     </section>
-
     <!-- Benefits Section -->
     <section class="benefits" id="benefits">
         <div class="container">
             <div class="section-header">
-                <h2>Výsledky, ktoré prinášame</h2>
-                <p>Reálne čísla od našich klientov</p>
+                <h2>Výsledky, ktoré doručíme po nasadení</h2>
+                <p>Metriky predaja a kvality leadov pre eCommerce klimatizácií</p>
             </div>
             <div class="benefits-grid">
                 <div class="benefit-item">
                     <div class="benefit-number">70%</div>
-                    <h4>Úspora nákladov</h4>
-                    <p>Na zákazníckej podpore</p>
+                    <h4>Rýchlejšia príprava ponuky</h4>
+                    <p>menej manuálnej práce obchodníka</p>
                 </div>
                 <div class="benefit-item">
                     <div class="benefit-number">3x</div>
-                    <h4>Viac konverzií</h4>
-                    <p>Vďaka okamžitým odpovediam</p>
+                    <h4>Vyššia konverzia</h4>
+                    <p>vďaka porovnaniu modelov a jasnej cene</p>
                 </div>
                 <div class="benefit-item">
                     <div class="benefit-number">85%</div>
-                    <h4>Automatizácia</h4>
-                    <p>Otázok bez ľudského zásahu</p>
+                    <h4>Predaj servisov</h4>
+                    <p>vyšší attach rate Dream Air Care balíčkov</p>
                 </div>
                 <div class="benefit-item">
                     <div class="benefit-number">&lt;2s</div>
-                    <h4>Čas odpovede</h4>
-                    <p>Priemerná rýchlosť reakcie</p>
+                    <h4>Rýchlosť rezervácie</h4>
+                    <p>od ponuky po výber termínu montáže</p>
                 </div>
             </div>
         </div>
@@ -834,48 +1229,48 @@
     <section class="pricing" id="pricing">
         <div class="container">
             <div class="section-header">
-                <h2>Jednoduché a transparentné ceny</h2>
-                <p>Vyberte si plán, ktorý vyhovuje vášmu biznisu</p>
+                <h2>Cenové triedy zariadení (s montážou)</h2>
+                <p>Základné triedy pre Webflow Ecomm Standard štýl</p>
             </div>
             <div class="pricing-grid">
                 <div class="pricing-card">
-                    <h3>Starter</h3>
-                    <p>Pre malé firmy a začiatočníkov</p>
-                    <div class="price">49€ <span>/mesiac</span></div>
+                    <h3>Ekonomická</h3>
+                    <p>Ideálne riešenie pre menšie byty</p>
+                    <div class="price">od 899€ <span>/s montážou</span></div>
                     <ul>
-                        <li>1 000 konverzácií/mesiac</li>
-                        <li>1 chatbot</li>
-                        <li>Základná analytika</li>
-                        <li>Email podpora</li>
-                        <li>Integrácia na web</li>
+                        <li>Split jednotka do 12 000 BTU</li>
+                        <li>Základná montáž v cene</li>
+                        <li>Energeticky úsporný režim</li>
+                        <li>Štandardná záruka 2 roky</li>
+                        <li>Možnosť doplniť Care Basic</li>
                     </ul>
                     <a href="#contact" class="btn btn-outline">Vybrať plán</a>
                 </div>
                 <div class="pricing-card popular">
-                    <h3>Professional</h3>
-                    <p>Pre rastúce firmy</p>
-                    <div class="price">149€ <span>/mesiac</span></div>
+                    <h3>Stredná trieda</h3>
+                    <p>Najčastejšia voľba pre domy a väčšie byty</p>
+                    <div class="price">od 1 390€ <span>/s montážou</span></div>
                     <ul>
-                        <li>10 000 konverzácií/mesiac</li>
-                        <li>3 chatboty</li>
-                        <li>Pokročilá analytika</li>
-                        <li>Prioritná podpora</li>
-                        <li>Multi-kanálová integrácia</li>
-                        <li>Vlastné branding</li>
+                        <li>Výkon 12 000–18 000 BTU</li>
+                        <li>Tichá prevádzka a Wi-Fi ovládanie</li>
+                        <li>Vyššia účinnosť (SEER trieda)</li>
+                        <li>Prioritný montážny termín</li>
+                        <li>Odporúčaný Care Comfort</li>
+                        <li>Možnosť viaczónového riešenia</li>
                     </ul>
                     <a href="#contact" class="btn btn-primary">Vybrať plán</a>
                 </div>
                 <div class="pricing-card">
-                    <h3>Enterprise</h3>
-                    <p>Pre veľké spoločnosti</p>
-                    <div class="price">Na mieru</div>
+                    <h3>Prémiová</h3>
+                    <p>Top riešenie pre náročné priestory</p>
+                    <div class="price">od 2 290€</div>
                     <ul>
-                        <li>Neobmedzené konverzácie</li>
-                        <li>Neobmedzené chatboty</li>
-                        <li>Dedikovaný account manager</li>
-                        <li>SLA garantované</li>
-                        <li>API prístup</li>
-                        <li>On-premise možnosť</li>
+                        <li>Prémiové značky a dizajnové rady</li>
+                        <li>Veľmi tichá prevádzka</li>
+                        <li>Rozšírená montáž a technický audit</li>
+                        <li>Prednostný servis</li>
+                        <li>Dream Air Care Premium</li>
+                        <li>Predĺžená záruka až 10 rokov</li>
                     </ul>
                     <a href="#contact" class="btn btn-outline">Kontaktovať nás</a>
                 </div>
@@ -886,9 +1281,9 @@
     <!-- CTA Section -->
     <section class="cta">
         <div class="container">
-            <h2>Pripravený začať?</h2>
-            <p>Vyskúšajte SmartAir AI asistenta zadarmo na 14 dní. Žiadna kreditná karta nie je potrebná.</p>
-            <a href="#contact" class="btn">Začať bezplatnú skúšku</a>
+            <h2>Pripravení spustiť predaj v štýle Webflow Ecomm Standard?</h2>
+            <p>Pošlite nám logo a brand podklady, doladíme šablónu 1:1 podľa vašej voľnej stránky a nasadíme zákaznícky konfigurátor.</p>
+            <a href="#contact" class="btn">Dohodnúť implementáciu</a>
         </div>
     </section>
 
@@ -898,24 +1293,24 @@
             <div class="contact-grid">
                 <div class="contact-info">
                     <h2>Porozprávajme sa</h2>
-                    <p>Máte otázky? Radi vám pomôžeme nájsť ideálne riešenie pre váš biznis.</p>
+                    <p>Máte otázky? Radi vám pripravíme Dream Air zákaznícky konfigurátor zladený s vaším Webflow eCommerce webom.</p>
                     <div class="contact-details">
                         <div class="contact-item">
-                            <div class="icon">📧</div>
+                            <div class="icon" aria-hidden="true"></div>
                             <div>
                                 <strong>Email</strong>
-                                <p>info@smartair.space</p>
+                                <p>info@dreamair.sk</p>
                             </div>
                         </div>
                         <div class="contact-item">
-                            <div class="icon">📞</div>
+                            <div class="icon" aria-hidden="true"></div>
                             <div>
                                 <strong>Telefón</strong>
-                                <p>+421 900 000 000</p>
+                                <p>+421 915 033 440</p>
                             </div>
                         </div>
                         <div class="contact-item">
-                            <div class="icon">📍</div>
+                            <div class="icon" aria-hidden="true"></div>
                             <div>
                                 <strong>Adresa</strong>
                                 <p>Bratislava, Slovensko</p>
@@ -960,18 +1355,27 @@
     <!-- Footer -->
     <footer>
         <div class="container">
+            <div class="footer-highlight">
+                <p>Nechajte si pripraviť moderný Dream Air zákaznícky konfigurátor vo fresh blue štýle.</p>
+                <a href="#contact" class="btn btn-primary">Rezervovať konzultáciu</a>
+            </div>
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <a href="#" class="logo">SmartAir AI</a>
-                    <p>Inteligentná zákaznícka podpora pre moderné firmy. Automatizujte a rastite s AI.</p>
+                    <a href="#" class="logo">Dream Air</a>
+                    <p>Predaj klimatizácií, rezervácie montáží a servisné balíčky v jednom eCommerce nástroji.</p>
+                    <div class="footer-meta">
+                        <span class="footer-chip">Ecomm Wizard</span>
+                        <span class="footer-chip">Dream Air Care</span>
+                        <span class="footer-chip">Rezervácie 24/7</span>
+                    </div>
                 </div>
                 <div>
-                    <h4>Produkt</h4>
+                    <h4>Riešenie</h4>
                     <ul>
-                        <li><a href="#features">Funkcie</a></li>
-                        <li><a href="#pricing">Cenník</a></li>
-                        <li><a href="#">Integrácie</a></li>
-                        <li><a href="#">API dokumentácia</a></li>
+                        <li><a href="#features">Konfigurátor</a></li>
+                        <li><a href="#pricing">Cenové triedy</a></li>
+                        <li><a href="#">Dream Air Care</a></li>
+                        <li><a href="#">Rezervácia montáže</a></li>
                     </ul>
                 </div>
                 <div>
@@ -984,7 +1388,7 @@
                     </ul>
                 </div>
                 <div>
-                    <h4>Právne</h4>
+                    <h4>Podpora</h4>
                     <ul>
                         <li><a href="#">Obchodné podmienky</a></li>
                         <li><a href="#">Ochrana súkromia</a></li>
@@ -994,7 +1398,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 SmartAir AI. Všetky práva vyhradené.</p>
+                <p>&copy; 2025 Dream Air. Všetky práva vyhradené.</p>
             </div>
         </div>
     </footer>
@@ -1032,7 +1436,7 @@
         window.addEventListener('scroll', function() {
             const nav = document.querySelector('nav');
             if (window.scrollY > 50) {
-                nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+                nav.style.boxShadow = '0 2px 20px rgba(0, 189, 235, 0.22)';
             } else {
                 nav.style.boxShadow = 'none';
             }

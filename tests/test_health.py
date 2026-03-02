@@ -15,4 +15,4 @@ def test_health_ok():
 def test_root_message():
     resp = client.get("/")
     assert resp.status_code == 200
-    assert resp.json().get("message") == "SmartAir API"
+    assert resp.json().get("message") == "Dream Air API"

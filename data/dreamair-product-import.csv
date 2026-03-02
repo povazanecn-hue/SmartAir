@@ -1,0 +1,49 @@
+Product Handle,Product Name,Variant Price,Variant Inventory,Requires Shipping,Variant Weight,Option1 Name,Option1 Value,Option2 Name,Option2 Value,Option3 Name,Option3 Value
+daikin-comfora,Daikin Comfora,1490,100,TRUE,30,Výkon (kW),2.0 kW,Farba,Biela,Plocha m2,do 25 m2
+daikin-comfora,Daikin Comfora,1590,100,TRUE,30,Výkon (kW),2.5 kW,Farba,Biela,Plocha m2,do 25 m2
+daikin-comfora,Daikin Comfora,1690,100,TRUE,30,Výkon (kW),3.5 kW,Farba,Biela,Plocha m2,do 40 m2
+daikin-comfora,Daikin Comfora,2050,100,TRUE,30,Výkon (kW),5.0 kW,Farba,Biela,Plocha m2,do 40 m2
+daikin-comfora,Daikin Comfora,2050,100,TRUE,30,Výkon (kW),6.0 kW,Farba,Biela,Plocha m2,do 60 m2
+daikin-comfora,Daikin Comfora,2890,100,TRUE,30,Výkon (kW),7.0 kW,Farba,Biela,Plocha m2,do 80 m2
+daikin-emura-3,Daikin Emura 3,2940,100,TRUE,30,Výkon (kW),2.5 kW,Farba,Biela,Plocha m2,do 25 m2
+daikin-emura-3,Daikin Emura 3,3360,100,TRUE,30,Výkon (kW),3.5 kW,Farba,Biela,Plocha m2,do 40 m2
+daikin-emura-3,Daikin Emura 3,3960,100,TRUE,30,Výkon (kW),4.2 kW,Farba,Biela,Plocha m2,do 40 m2
+daikin-emura-3,Daikin Emura 3,4130,100,TRUE,30,Výkon (kW),5.0 kW,Farba,Biela,Plocha m2,do 60 m2
+daikin-perfera,Daikin Perfera,2090,100,TRUE,30,Výkon (kW),2.5 kW,Farba,Biela,Plocha m2,do 25 m2
+daikin-perfera,Daikin Perfera,2390,100,TRUE,30,Výkon (kW),3.5 kW,Farba,Biela,Plocha m2,do 40 m2
+daikin-perfera,Daikin Perfera,2760,100,TRUE,30,Výkon (kW),4.2 kW,Farba,Biela,Plocha m2,do 40 m2
+daikin-perfera,Daikin Perfera,2930,100,TRUE,30,Výkon (kW),5.0 kW,Farba,Biela,Plocha m2,do 60 m2
+daikin-perfera,Daikin Perfera,3550,100,TRUE,30,Výkon (kW),6.0 kW,Farba,Biela,Plocha m2,do 80 m2
+daikin-perfera,Daikin Perfera,4040,100,TRUE,30,Výkon (kW),7.0 kW,Farba,Biela,Plocha m2,do 80 m2
+daikin-sensira,Daikin Sensira,1180,100,TRUE,30,Výkon (kW),2.0 kW,Farba,Biela,Plocha m2,do 25 m2
+daikin-sensira,Daikin Sensira,1270,100,TRUE,30,Výkon (kW),2.5 kW,Farba,Biela,Plocha m2,do 25 m2
+daikin-sensira,Daikin Sensira,1350,100,TRUE,30,Výkon (kW),3.5 kW,Farba,Biela,Plocha m2,do 40 m2
+daikin-sensira,Daikin Sensira,1530,100,TRUE,30,Výkon (kW),4.2 kW,Farba,Biela,Plocha m2,do 40 m2
+daikin-sensira,Daikin Sensira,1820,100,TRUE,30,Výkon (kW),5.0 kW,Farba,Biela,Plocha m2,do 60 m2
+daikin-sensira,Daikin Sensira,2090,100,TRUE,30,Výkon (kW),6.0 kW,Farba,Biela,Plocha m2,do 60 m2
+daikin-sensira,Daikin Sensira,2390,100,TRUE,30,Výkon (kW),7.0 kW,Farba,Biela,Plocha m2,do 80 m2
+daikin-stylish,Daikin Stylish,2590,100,TRUE,30,Výkon (kW),2.0 kW,Farba,Biela,Plocha m2,do 25 m2
+daikin-stylish,Daikin Stylish,2640,100,TRUE,30,Výkon (kW),2.5 kW,Farba,Biela,Plocha m2,do 25 m2
+daikin-stylish,Daikin Stylish,2990,100,TRUE,30,Výkon (kW),3.5 kW,Farba,Biela,Plocha m2,do 40 m2
+daikin-stylish,Daikin Stylish,3490,100,TRUE,30,Výkon (kW),4.2 kW,Farba,Biela,Plocha m2,do 40 m2
+daikin-stylish,Daikin Stylish,3890,100,TRUE,30,Výkon (kW),5.0 kW,Farba,Biela,Plocha m2,do 60 m2
+daikin-ururu-sarara,Daikin Ururu Sarara,3550,100,TRUE,30,Výkon (kW),2.5 kW,Farba,Biela,Plocha m2,do 25 m2
+daikin-ururu-sarara,Daikin Ururu Sarara,3990,100,TRUE,30,Výkon (kW),3.5 kW,Farba,Biela,Plocha m2,do 40 m2
+daikin-ururu-sarara,Daikin Ururu Sarara,4850,100,TRUE,30,Výkon (kW),5.0 kW,Farba,Biela,Plocha m2,do 60 m2
+midea-oasis,Midea Oasis Plus,1640,100,TRUE,30,Výkon (kW),2.5 kW,Farba,Biela,Plocha m2,do 25 m2
+midea-oasis,Midea Oasis Plus,1750,100,TRUE,30,Výkon (kW),3.5 kW,Farba,Biela,Plocha m2,do 40 m2
+samsung-windfree-comfort-s2,Samsung WindFree Comfort s2,1340,100,TRUE,30,Výkon (kW),2.5 kW,Farba,Biela,Plocha m2,do 25 m2
+samsung-windfree-comfort-s2,Samsung WindFree Comfort s2,1430,100,TRUE,30,Výkon (kW),3.5 kW,Farba,Biela,Plocha m2,do 40 m2
+samsung-windfree-comfort-s2,Samsung WindFree Comfort s2,1990,100,TRUE,30,Výkon (kW),5.0 kW,Farba,Biela,Plocha m2,do 60 m2
+samsung-windfree-comfort-s2,Samsung WindFree Comfort s2,3090,100,TRUE,30,Výkon (kW),6.5 kW,Farba,Biela,Plocha m2,do 80 m2
+samsung-windfree-elite-s2,Samsung WindFree Elite s2,1690,100,TRUE,30,Výkon (kW),2.5 kW,Farba,Biela,Plocha m2,do 25 m2
+samsung-windfree-elite-s2,Samsung WindFree Elite s2,1860,100,TRUE,30,Výkon (kW),3.5 kW,Farba,Biela,Plocha m2,do 40 m2
+tcl-elite-pro,TCL Elite Pro,1110,100,TRUE,30,Výkon (kW),2.5 kW,Farba,Biela,Plocha m2,do 25 m2
+tcl-elite-pro,TCL Elite Pro,1210,100,TRUE,30,Výkon (kW),3.5 kW,Farba,Biela,Plocha m2,do 40 m2
+tcl-elite-pro,TCL Elite Pro,1390,100,TRUE,30,Výkon (kW),5.0 kW,Farba,Biela,Plocha m2,do 60 m2
+tcl-elite-pro,TCL Elite Pro,1790,100,TRUE,30,Výkon (kW),7.0 kW,Farba,Biela,Plocha m2,do 80 m2
+tcl-freshin,TCL FreshIN,1660,100,TRUE,30,Výkon (kW),3.5 kW,Farba,Biela,Plocha m2,do 40 m2
+tcl-gentle-cool,TCL Gentle Cool,1190,100,TRUE,30,Výkon (kW),2.6 kW,Farba,Biela,Plocha m2,do 25 m2
+tcl-gentle-cool,TCL Gentle Cool,1290,100,TRUE,30,Výkon (kW),3.4 kW,Farba,Biela,Plocha m2,do 40 m2
+tcl-gentle-cool,TCL Gentle Cool,1530,100,TRUE,30,Výkon (kW),5.1 kW,Farba,Biela,Plocha m2,do 60 m2
+tcl-gentle-cool,TCL Gentle Cool,1920,100,TRUE,30,Výkon (kW),7.0 kW,Farba,Biela,Plocha m2,do 80 m2

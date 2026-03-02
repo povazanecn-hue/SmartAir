@@ -1,5 +1,5 @@
 /**
- * SmartAir Reservation Form Widget
+ * Dream Air B2B Reservation Form Widget
  * Formulár pre rezerváciu obhliadky
  */
 
