@@ -1,0 +1,4 @@
+#!/bin/sh
+# Blocks accidental MENUMAT artifacts in DreamAir commits.
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/repo-guard.ps1 -PreCommit
+exit $?
