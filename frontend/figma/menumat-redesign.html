@@ -1,0 +1,773 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MenuMat Redesign - pokračovanie (3 varianty)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Libre+Caslon+Display:wght@600;700&family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold-1: #f2c46a;
+      --gold-2: #ffde9a;
+      --brown-1: #120c09;
+      --brown-2: #1d1410;
+      --cream: #f4efe7;
+      --ink: #2f1e14;
+      --linen-line: #c89d3d;
+      --obsidian: #0e0a08;
+      --obsidian-2: #18100d;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: radial-gradient(circle at 20% -10%, #18110d 0%, #0b0b0b 60%);
+      color: #fdf9f2;
+      font-family: "Manrope", "Source Sans 3", system-ui, sans-serif;
+    }
+
+    .canvas {
+      width: min(1420px, 100%);
+      margin: 0 auto;
+      padding: 40px 22px 60px;
+      display: grid;
+      gap: 44px;
+    }
+
+    .intro {
+      border: 1px solid rgba(255, 214, 153, 0.22);
+      border-radius: 18px;
+      padding: 20px;
+      background: linear-gradient(145deg, rgba(43, 30, 21, 0.78), rgba(19, 13, 10, 0.9));
+      box-shadow: 0 16px 44px rgba(0, 0, 0, 0.32);
+    }
+
+    .intro h1 {
+      margin: 0 0 10px;
+      font-size: 28px;
+      font-family: "Playfair Display", serif;
+      letter-spacing: 0.02em;
+      color: #ffe3b4;
+    }
+
+    .intro p {
+      margin: 0;
+      color: rgba(255, 238, 207, 0.86);
+      max-width: 90ch;
+      line-height: 1.55;
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      width: min(1320px, 100%);
+      margin: -22px auto 0;
+    }
+
+    .result-card {
+      border-radius: 14px;
+      padding: 14px;
+      border: 1px solid rgba(255, 214, 153, 0.2);
+      background: linear-gradient(155deg, rgba(35, 24, 17, 0.86), rgba(17, 12, 10, 0.95));
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24);
+    }
+
+    .result-card h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      color: #ffe4b5;
+      font-family: "Playfair Display", serif;
+      letter-spacing: 0.03em;
+    }
+
+    .result-card p {
+      margin: 0;
+      font-size: 13px;
+      color: rgba(255, 238, 207, 0.84);
+      line-height: 1.45;
+    }
+
+    .result-pill {
+      display: inline-flex;
+      margin-top: 10px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255, 214, 153, 0.4);
+      color: #ffd892;
+      background: rgba(255, 214, 153, 0.08);
+    }
+
+    .result-card.recommended {
+      border-color: rgba(255, 230, 170, 0.6);
+      background: linear-gradient(140deg, rgba(56, 37, 24, 0.9), rgba(24, 16, 12, 0.98));
+    }
+
+    .screen {
+      width: min(1320px, 100%);
+      aspect-ratio: 1320 / 880;
+      border-radius: 30px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 214, 153, 0.22);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.36);
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .screen::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 85% -10%, rgba(255, 214, 153, 0.12), transparent 45%);
+    }
+
+    .screen-label {
+      position: absolute;
+      top: 20px;
+      left: 22px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      z-index: 4;
+      backdrop-filter: blur(8px);
+    }
+
+    .frame {
+      position: absolute;
+      inset: 66px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex: 0 0 auto;
+    }
+
+    .brand {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.05;
+      letter-spacing: 0.02em;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1.55fr 1fr;
+      gap: 14px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 0;
+    }
+
+    .panel {
+      border-radius: 18px;
+      padding: 16px;
+      min-height: 0;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .title {
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .muted {
+      margin: 0;
+      opacity: 0.74;
+    }
+
+    .menu-list {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 9px 12px;
+      margin-top: 10px;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .metric {
+      border-radius: 12px;
+      padding: 11px;
+    }
+
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .day-card {
+      border-radius: 12px;
+      padding: 10px;
+      min-height: 122px;
+    }
+
+    .variant-note {
+      margin: 12px auto 0;
+      width: min(1320px, 100%);
+      font-size: 13px;
+      color: rgba(255, 229, 190, 0.88);
+      text-align: right;
+      padding-right: 8px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: #f2c46a;
+    }
+
+    .amber {
+      background:
+        radial-gradient(circle at 18% 12%, rgba(255, 204, 128, 0.16), transparent 35%),
+        radial-gradient(circle at 78% 20%, rgba(255, 225, 170, 0.12), transparent 40%),
+        linear-gradient(135deg, var(--brown-1) 0%, var(--brown-2) 60%, #241710 100%);
+    }
+
+    .amber .screen-label {
+      background: rgba(0, 0, 0, 0.38);
+      color: #ffe6b4;
+      border: 1px solid rgba(255, 214, 153, 0.34);
+    }
+
+    .amber .brand {
+      font-family: "Playfair Display", serif;
+      color: #ffe6b4;
+    }
+
+    .amber .brand-dot {
+      background: var(--gold-1);
+      box-shadow: 0 0 18px rgba(255, 214, 153, 0.78);
+    }
+
+    .amber .tag {
+      color: #ffd890;
+      border: 1px solid rgba(255, 214, 153, 0.32);
+      background: rgba(255, 214, 153, 0.1);
+    }
+
+    .amber .panel {
+      backdrop-filter: blur(14px);
+      background: linear-gradient(160deg, rgba(255, 214, 153, 0.14), rgba(44, 28, 18, 0.82));
+      border: 1px solid rgba(255, 214, 153, 0.26);
+      box-shadow: inset 0 0 0 1px rgba(255, 214, 153, 0.07), 0 10px 34px rgba(0, 0, 0, 0.36);
+    }
+
+    .amber .metric {
+      background: rgba(0, 0, 0, 0.24);
+      border: 1px solid rgba(255, 214, 153, 0.17);
+    }
+
+    .amber .btn-primary {
+      background: linear-gradient(135deg, var(--gold-1), var(--gold-2));
+      color: #2a1a10;
+      box-shadow: 0 10px 24px rgba(242, 196, 106, 0.38);
+    }
+
+    .amber .btn-soft {
+      color: #ffe6b4;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 214, 153, 0.24);
+    }
+
+    .linen {
+      background:
+        radial-gradient(circle at 25% 15%, rgba(200, 157, 61, 0.12), transparent 42%),
+        linear-gradient(180deg, #f9f6ef 0%, #efe7db 60%, #e7dfd3 100%);
+      color: var(--ink);
+      font-family: "Source Sans 3", system-ui, sans-serif;
+    }
+
+    .linen .screen-label {
+      background: rgba(47, 30, 20, 0.92);
+      color: #f5e4c1;
+      border: 1px solid rgba(47, 30, 20, 0.22);
+    }
+
+    .linen .brand {
+      font-family: "Libre Caslon Display", serif;
+      color: #2f1e14;
+    }
+
+    .linen .brand-dot {
+      background: #9d6f28;
+      box-shadow: 0 0 0 4px rgba(201, 157, 61, 0.2);
+    }
+
+    .linen .tag {
+      color: #3a281b;
+      border: 1px solid rgba(47, 30, 20, 0.2);
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .linen .panel,
+    .linen .day-card,
+    .linen .metric {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid rgba(44, 30, 20, 0.09);
+      box-shadow: 0 12px 30px rgba(47, 30, 20, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.66);
+    }
+
+    .linen .btn-primary {
+      background: var(--ink);
+      color: #fdf6e6;
+      border: 1px solid #c6a162;
+      box-shadow: 0 8px 20px rgba(47, 30, 20, 0.2);
+    }
+
+    .linen .btn-soft {
+      background: #ffffff;
+      color: #2f1e14;
+      border: 1px solid #c89d3d;
+      box-shadow: 0 4px 14px rgba(47, 30, 20, 0.08);
+    }
+
+    .obsidian {
+      background:
+        radial-gradient(circle at 12% 18%, rgba(255, 204, 115, 0.12), transparent 40%),
+        radial-gradient(circle at 80% 8%, rgba(255, 221, 154, 0.18), transparent 44%),
+        linear-gradient(140deg, var(--obsidian) 0%, #130d0b 45%, var(--obsidian-2) 100%);
+    }
+
+    .obsidian::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.44;
+      mix-blend-mode: screen;
+      background: repeating-linear-gradient(
+        125deg,
+        rgba(255, 204, 115, 0.06),
+        rgba(255, 204, 115, 0.06) 1px,
+        transparent 1px,
+        transparent 16px
+      );
+    }
+
+    .obsidian .screen-label {
+      background: rgba(0, 0, 0, 0.42);
+      color: #ffdfa5;
+      border: 1px solid rgba(255, 204, 115, 0.34);
+    }
+
+    .obsidian .brand {
+      font-family: "Cormorant Garamond", serif;
+      color: #ffdd9a;
+      font-size: 32px;
+    }
+
+    .obsidian .brand-dot {
+      background: #ffca72;
+      box-shadow: 0 0 18px rgba(255, 202, 114, 0.68);
+    }
+
+    .obsidian .tag {
+      color: #ffd890;
+      border: 1px solid rgba(255, 204, 115, 0.3);
+      background: rgba(255, 204, 115, 0.1);
+    }
+
+    .obsidian .panel,
+    .obsidian .day-card,
+    .obsidian .metric {
+      background: rgba(20, 14, 12, 0.82);
+      border: 1px solid rgba(255, 204, 115, 0.22);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.44);
+    }
+
+    .obsidian .btn-primary {
+      background: linear-gradient(120deg, #ffc76b, #ffdf9a);
+      color: #1b100c;
+      box-shadow: 0 10px 22px rgba(255, 204, 115, 0.34);
+    }
+
+    .obsidian .btn-soft {
+      background: transparent;
+      color: #ffdd9a;
+      border: 1px solid rgba(255, 221, 154, 0.45);
+    }
+
+    @media (max-width: 1080px) {
+      .results-grid {
+        grid-template-columns: 1fr;
+        margin-top: -14px;
+      }
+
+      .frame {
+        inset: 62px 16px 16px;
+      }
+
+      .brand {
+        font-size: 24px;
+      }
+
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .week-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .canvas {
+        padding: 24px 12px 44px;
+        gap: 28px;
+      }
+
+      .intro h1 {
+        font-size: 24px;
+      }
+
+      .frame {
+        position: static;
+        inset: auto;
+        padding: 64px 10px 10px;
+        gap: 10px;
+      }
+
+      .screen {
+        aspect-ratio: auto;
+      }
+
+      .bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .actions {
+        justify-content: flex-start;
+      }
+
+      .week-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="canvas">
+    <section class="intro">
+      <h1>MenuMat redesign - pokračovanie</h1>
+      <p>
+        Dopracované 3 vizuálne smery pre desktop editor denného menu: Amber Glass, Linen Luxe a Obsidian Spark.
+        Verzia je vyčistená (bez obrovského base64 bloku), s opravenou diakritikou a responzívnym správaním pre
+        menšie obrazovky.
+      </p>
+    </section>
+
+    <section class="results-grid" aria-label="Výsledky hodnotenia variantov">
+      <article class="result-card">
+        <h3>Variant A · Amber Glass</h3>
+        <p>Silný vizuálny charakter, veľmi dobré CTA a vhodné pre prémiové gastro koncepty.</p>
+        <span class="result-pill">Skóre 8.6/10</span>
+      </article>
+      <article class="result-card recommended">
+        <h3>Variant B · Linen Luxe</h3>
+        <p>Najlepšia čitateľnosť počas dňa, čisté print/export flow a najnižší kognitívny šum.</p>
+        <span class="result-pill">Odporúčaný smer</span>
+      </article>
+      <article class="result-card">
+        <h3>Variant C · Obsidian Spark</h3>
+        <p>Power dashboard look pre nočné služby a monitoring, výrazný kontrast pre rýchlu orientáciu.</p>
+        <span class="result-pill">Skóre 8.2/10</span>
+      </article>
+    </section>
+
+    <section class="screen amber">
+      <div class="screen-label">Variant A - Amber Glass</div>
+      <div class="frame">
+        <header class="bar">
+          <div class="brand-wrap">
+            <span class="brand-dot"></span>
+            <h2 class="brand">Denné menu · Editor</h2>
+          </div>
+          <div class="actions">
+            <span class="tag">AI asistent Olívia</span>
+            <button class="btn btn-primary">Publikovať koncepty</button>
+          </div>
+        </header>
+        <div class="main-grid">
+          <div class="stack">
+            <article class="panel">
+              <div class="row">
+                <p class="title">Pondelok 23. februára</p>
+                <span class="tag">Koncept</span>
+              </div>
+              <div class="menu-list">
+                <p class="muted">Cesnaková polievka</p><p>4.90 €</p>
+                <p class="muted">Kurací steak so zeleninou</p><p>9.90 €</p>
+                <p class="muted">Vyprážaný rezeň s hranolkami</p><p>9.50 €</p>
+                <p class="muted">Palacinky s džemom</p><p>4.50 €</p>
+              </div>
+              <div class="row" style="margin-top: 12px;">
+                <button class="btn btn-primary">Pridať jedlo</button>
+                <p class="muted">Publikované: 0 · Koncepty: 5</p>
+              </div>
+            </article>
+            <article class="panel">
+              <div class="row">
+                <p class="title">Cenový engine</p>
+                <p class="muted">Marža 120 %</p>
+              </div>
+              <input type="range" min="50" max="300" value="120">
+              <div class="metric-grid">
+                <div class="metric">
+                  <p class="muted">Odporúčaná cena</p>
+                  <p class="title" style="color:#ffd890;">7.20 €</p>
+                </div>
+                <div class="metric">
+                  <p class="muted">Finálna cena</p>
+                  <p class="title" style="color:#ffd890;">8.90 €</p>
+                </div>
+              </div>
+            </article>
+          </div>
+          <aside class="panel stack">
+            <p class="title">AI Olívia</p>
+            <p class="muted">Potrebujete nákupný zoznam, export alebo navýšenie marže? Napíšte.</p>
+            <div class="metric">
+              <p class="title" style="color:#ffd890;">Generuj nákupný zoznam</p>
+              <p class="muted">Základ pre dnešné menu + rezerva 10 %</p>
+            </div>
+            <div class="metric">
+              <p class="title" style="color:#ffd890;">Export pre kuchyňu</p>
+              <p class="muted">TV FullHD + PDF + Excel</p>
+            </div>
+            <button class="btn btn-soft" style="margin-top:auto;">Napísať správu Olívii...</button>
+          </aside>
+        </div>
+      </div>
+    </section>
+    <p class="variant-note">A: prémiový večerný vizuál, silné CTA a atmosféra.</p>
+
+    <section class="screen linen">
+      <div class="screen-label">Variant B - Linen Luxe</div>
+      <div class="frame">
+        <header class="bar">
+          <div class="brand-wrap">
+            <span class="brand-dot"></span>
+            <h2 class="brand">Denné menu · Kurátor ponuky</h2>
+          </div>
+          <div class="actions">
+            <button class="btn btn-soft">Zdieľať PDF</button>
+            <button class="btn btn-primary">Publikovať</button>
+          </div>
+        </header>
+        <div class="main-grid">
+          <article class="panel stack">
+            <p class="title" style="font-family:'Playfair Display', serif; font-size:24px;">Menu na týždeň</p>
+            <div class="week-grid">
+              <div class="day-card">
+                <p class="title">Pondelok</p>
+                <p class="muted">Cesnaková polievka</p>
+                <p class="muted">Kurací steak</p>
+              </div>
+              <div class="day-card">
+                <p class="title">Utorok</p>
+                <p class="muted">Hovädzí vývar</p>
+                <p class="muted">Panna cotta</p>
+              </div>
+              <div class="day-card">
+                <p class="title">Streda</p>
+                <p class="muted">Vegánsky bowl</p>
+                <p class="muted">Brownie</p>
+              </div>
+              <div class="day-card">
+                <p class="title">Štvrtok</p>
+                <p class="muted">Losos s citrónom</p>
+                <p class="muted">Crème brûlée</p>
+              </div>
+              <div class="day-card">
+                <p class="title">Piatok</p>
+                <p class="muted">Burger & hranolky</p>
+                <p class="muted">Cheesecake</p>
+              </div>
+            </div>
+            <div class="actions" style="justify-content:flex-start;">
+              <button class="btn btn-primary">Pridať jedlo</button>
+              <button class="btn btn-soft">AI návrh jedla</button>
+            </div>
+          </article>
+          <aside class="panel stack">
+            <p class="title">AI Olívia · Concierge</p>
+            <div class="metric">
+              <p class="title">Generuj nákupný zoznam</p>
+              <p class="muted">Automaticky podľa menu + rezerva 8 %</p>
+            </div>
+            <div class="metric">
+              <p class="title">Export TV / PDF / Excel</p>
+              <p class="muted">Minimal / Modern / Rustikálna šablóna</p>
+            </div>
+            <div class="metric">
+              <p class="title">Kontrola alergénov</p>
+              <p class="muted">Zvýraznenie alergénov priamo v exporte</p>
+            </div>
+            <button class="btn btn-primary" style="margin-top:auto;">Napísať Olívii...</button>
+          </aside>
+        </div>
+      </div>
+    </section>
+    <p class="variant-note">B: svetlý štýl pre denné prevádzky a print/export workflow.</p>
+
+    <section class="screen obsidian">
+      <div class="screen-label">Variant C - Obsidian Spark</div>
+      <div class="frame">
+        <header class="bar">
+          <div class="brand-wrap">
+            <span class="brand-dot"></span>
+            <h2 class="brand">MenuMat Dashboard · Lightning</h2>
+          </div>
+          <div class="actions">
+            <button class="btn btn-primary">AI týždeň</button>
+            <button class="btn btn-soft">Export</button>
+          </div>
+        </header>
+        <div class="main-grid" style="position:relative; z-index:2;">
+          <article class="panel stack">
+            <div class="row">
+              <p class="title" style="color:#ffdd9a;">Denné menu (koncepty)</p>
+              <p class="muted">23. feb - 27. feb 2026</p>
+            </div>
+            <div class="week-grid">
+              <div class="day-card">
+                <p class="title">Po</p>
+                <p class="muted">Cesnaková</p>
+                <p class="muted">Kurací steak</p>
+                <p class="muted">Palacinky</p>
+              </div>
+              <div class="day-card">
+                <p class="title">Ut</p>
+                <p class="muted">Hovädzí vývar</p>
+                <p class="muted">Losos</p>
+              </div>
+              <div class="day-card">
+                <p class="title">St</p>
+                <p class="muted">Vegánsky bowl</p>
+                <p class="muted">Brownie</p>
+              </div>
+              <div class="day-card">
+                <p class="title">Št</p>
+                <p class="muted">Burger</p>
+                <p class="muted">Cheesecake</p>
+              </div>
+              <div class="day-card">
+                <p class="title">Pi</p>
+                <p class="muted">Rizoto</p>
+                <p class="muted">Tiramisu</p>
+              </div>
+            </div>
+            <div class="actions" style="justify-content:flex-start;">
+              <button class="btn btn-primary">Pridať jedlo</button>
+              <button class="btn btn-soft">AI návrh</button>
+            </div>
+          </article>
+          <aside class="panel stack">
+            <p class="title" style="color:#ffdd9a;">AI Olívia · Rýchle akcie</p>
+            <div class="metric">
+              <p class="title" style="color:#ffdd9a;">Generuj nákupný zoznam</p>
+              <p class="muted">Z menu + rezerva 12 %</p>
+            </div>
+            <div class="metric">
+              <p class="title" style="color:#ffdd9a;">Export TV / PDF / Excel</p>
+              <p class="muted">Modern / Minimal / Rustikál</p>
+            </div>
+            <div class="metric">
+              <p class="title" style="color:#ffdd9a;">Cenový engine</p>
+              <p class="muted">Marža 120 % · DPH 20 %</p>
+            </div>
+            <button class="btn btn-primary" style="margin-top:auto;">Napísať Olívii...</button>
+          </aside>
+        </div>
+      </div>
+    </section>
+    <p class="variant-note">C: nočný power režim pre high-contrast monitoring v prevádzke.</p>
+  </main>
+</body>
+</html>

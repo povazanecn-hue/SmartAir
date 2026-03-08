@@ -1,13 +1,39 @@
 {
-  // Start new terminals in the copied project path on C: drive
-  "terminal.integrated.cwd": "C:\\Dev\\SmartAir",
-
   // Python test discovery and runner
   "python.testing.pytestEnabled": true,
   "python.testing.pytestArgs": [
     "tests"
   ],
 
-  // Use the system Python configured in this environment
-  "python.defaultInterpreterPath": "C:\\Python313\\python.exe"
+  // Cross-platform: use workspaceFolder for terminal cwd
+  "terminal.integrated.cwd": "${workspaceFolder}",
+
+  // Editor settings for consistent formatting
+  "editor.formatOnSave": true,
+  "editor.tabSize": 4,
+  "files.eol": "\n",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+
+  // Python-specific settings
+  "python.analysis.typeCheckingMode": "basic",
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+
+  // Live Server preview for Figma HTML mocky
+  "liveServer.settings.port": 5500,
+  "liveServer.settings.host": "127.0.0.1",
+  "liveServer.settings.root": "./frontend/figma",
+  "liveServer.settings.file": "menumat-redesign.html",
+  "liveServer.settings.wait": 0,
+  "liveServer.settings.NoBrowser": false,
+  "liveServer.settings.ignoreFiles": [
+    "**/*.pyc",
+    "**/__pycache__/**"
+  ],
+  "liveServer.settings.AdvanceCustomBrowserCmdLine": ""
 }

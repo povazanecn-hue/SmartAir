@@ -1,0 +1,24 @@
+{
+  "name": "dreamair-chatgpt-app",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "ChatGPT App MCP server and widget for SmartAir (Dream Air configurator).",
+  "scripts": {
+    "dev": "tsx watch server/src/index.ts",
+    "start": "node dist/server/src/index.js",
+    "serve": "node dist/server/src/index.js",
+    "build": "npm run build:server",
+    "build:server": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/ext-apps": "^1.1.2",
+    "@modelcontextprotocol/sdk": "^1.24.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "tsx": "^4.10.0",
+    "typescript": "^5.4.2"
+  }
+}

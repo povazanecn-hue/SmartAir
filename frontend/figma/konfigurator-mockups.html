@@ -1,0 +1,1501 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dream Air Konfigurator - 12 krokov</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap">
+  <style>
+    :root {
+      --bg-1: #082B4A;
+      --bg-2: #0D3C66;
+      --bg-3: #0A4B7A;
+      --surface: rgba(27, 79, 121, 0.7);
+      --surface-strong: rgba(255, 255, 255, 0.08);
+      --surface-soft: rgba(255, 255, 255, 0.04);
+      --accent-1: #2F80FF;
+      --accent-2: #00BDEB;
+      --text: #FFFFFF;
+      --text-muted: rgba(255, 255, 255, 0.7);
+      --text-faint: rgba(255, 255, 255, 0.55);
+      --border: rgba(255, 255, 255, 0.16);
+      --shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "DM Sans", system-ui, sans-serif;
+      background: radial-gradient(circle at 20% 20%, #0e3a63 0%, #061a2e 55%, #041324 100%);
+      color: var(--text);
+    }
+
+    .canvas {
+      padding: 80px;
+      display: grid;
+      grid-template-columns: repeat(3, 1200px);
+      gap: 80px;
+      width: max-content;
+    }
+
+    .screen {
+      width: 1200px;
+      height: 800px;
+      border-radius: 32px;
+      position: relative;
+      overflow: hidden;
+      padding: 32px;
+      border: 1px solid var(--border);
+      background: radial-gradient(circle at top left, rgba(47, 128, 255, 0.15), transparent 55%),
+                  radial-gradient(circle at 85% 10%, rgba(0, 189, 235, 0.12), transparent 55%),
+                  linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 45%, var(--bg-3) 100%);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .screen::before,
+    .screen::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      background: radial-gradient(circle at center, rgba(47, 128, 255, 0.22), transparent 70%);
+      pointer-events: none;
+    }
+
+    .screen::before {
+      width: 320px;
+      height: 320px;
+      top: -120px;
+      right: -120px;
+    }
+
+    .screen::after {
+      width: 240px;
+      height: 240px;
+      bottom: -80px;
+      left: -80px;
+      background: radial-gradient(circle at center, rgba(0, 189, 235, 0.2), transparent 70%);
+    }
+
+    .screen-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 2;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #031323;
+    }
+
+    .brand-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .brand-sub {
+      font-size: 12px;
+      color: var(--text-faint);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .head-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .mode-chip {
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--surface-strong);
+      border: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .stepper {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .step-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      font-size: 11px;
+      display: grid;
+      place-items: center;
+      color: var(--text-faint);
+      background: var(--surface-soft);
+    }
+
+    .step-dot.active {
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      color: #061a2e;
+      font-weight: 700;
+      border: none;
+    }
+
+    .step-label {
+      font-size: 14px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .screen-body {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+      z-index: 2;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px;
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .panel h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 26px;
+      margin: 0;
+    }
+
+    .panel h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 18px;
+      margin: 0 0 8px 0;
+    }
+
+    .panel p {
+      margin: 0;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .hero-card {
+      background: linear-gradient(160deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      border-radius: 20px;
+      padding: 20px;
+      min-height: 180px;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .hero-visual {
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(47,128,255,0.4), rgba(0,189,235,0.2)),
+                  radial-gradient(circle at 20% 20%, rgba(255,255,255,0.2), transparent 60%);
+      height: 200px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-visual::after {
+      content: "Lifestyle photo";
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text);
+    }
+
+    .card-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .card-grid.cols-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .card-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .card {
+      background: var(--surface-strong);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .card strong {
+      font-size: 16px;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .chip.active {
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      color: #051425;
+      font-weight: 600;
+      border: none;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .field {
+      background: rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .field label {
+      font-size: 12px;
+      color: var(--text-faint);
+      display: block;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .field span {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .info-card {
+      background: rgba(0, 189, 235, 0.12);
+      border: 1px solid rgba(0, 189, 235, 0.35);
+      border-radius: 16px;
+      padding: 14px 16px;
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    .range-bar {
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.15);
+      overflow: hidden;
+    }
+
+    .range-fill {
+      height: 100%;
+      width: 65%;
+      background: linear-gradient(90deg, var(--accent-2), var(--accent-1));
+    }
+
+    .toggle-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 14px;
+    }
+
+    .toggle {
+      width: 48px;
+      height: 24px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.2);
+      position: relative;
+    }
+
+    .toggle::after {
+      content: "";
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #fff;
+      position: absolute;
+      top: 3px;
+      left: 3px;
+    }
+
+    .toggle.on {
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    }
+
+    .toggle.on::after {
+      left: 27px;
+      background: #041a2c;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .table th,
+    .table td {
+      padding: 10px 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      text-align: left;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(47,128,255,0.2);
+      border: 1px solid rgba(47,128,255,0.5);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+    }
+
+    .package {
+      border-radius: 18px;
+      padding: 18px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .package.highlight {
+      background: linear-gradient(145deg, rgba(47,128,255,0.22), rgba(0,189,235,0.14));
+      border-color: rgba(0,189,235,0.5);
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 15px;
+    }
+
+    .price-total {
+      font-size: 24px;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 600;
+    }
+
+    .checklist {
+      display: grid;
+      gap: 10px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.06);
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .check-box {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.5);
+      background: rgba(47,128,255,0.3);
+    }
+
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+    }
+
+    .calendar div {
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.08);
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .calendar .active {
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      color: #051625;
+      font-weight: 700;
+    }
+
+    .success {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .success-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      display: grid;
+      place-items: center;
+      color: #041a2c;
+      font-weight: 700;
+    }
+
+    .footer-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 2;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+      font-weight: 600;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 14px;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      color: #031426;
+      border: none;
+    }
+
+    .btn.ghost {
+      background: transparent;
+    }
+
+    .side-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .summary-list {
+      display: grid;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .summary-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid var(--border);
+      font-size: 12px;
+    }
+
+    .ai-card {
+      background: rgba(47,128,255,0.16);
+      border: 1px solid rgba(47,128,255,0.4);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .ai-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .mini-note {
+      font-size: 11px;
+      color: var(--text-faint);
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+    <!-- Step 1 -->
+    <section class="screen">
+      <div class="screen-head">
+        <div class="brand">
+          <div class="logo">DA</div>
+          <div>
+            <div class="brand-title">Dream Air</div>
+            <div class="brand-sub">Zakaznicky konfigurator</div>
+          </div>
+        </div>
+        <div class="head-right">
+          <div class="stepper">
+            <div class="step-dot active">1</div>
+            <div class="step-dot">2</div>
+            <div class="step-dot">3</div>
+            <div class="step-dot">4</div>
+            <div class="step-dot">5</div>
+            <div class="step-dot">6</div>
+            <div class="step-dot">7</div>
+            <div class="step-dot">8</div>
+            <div class="step-dot">9</div>
+            <div class="step-dot">10</div>
+            <div class="step-dot">11</div>
+            <div class="step-dot">12</div>
+          </div>
+          <div class="mode-chip">App mode</div>
+        </div>
+      </div>
+      <div class="step-label">Krok 1 / 12 - Uvodny katalog</div>
+      <div class="screen-body">
+        <div class="panel">
+          <div class="hero">
+            <div class="hero-card">
+              <h2>Dream Air zakaznicky konfigurator</h2>
+              <p>Vyberte si idealnu klimatizaciu v 12 krokoch. Transparentne, rychlo a s AI sprievodcom.</p>
+              <div class="btn-row" style="margin-top:16px;">
+                <button class="btn primary">Spustit konfigurator</button>
+                <button class="btn ghost">Pozriet katalog</button>
+              </div>
+            </div>
+            <div class="hero-visual"></div>
+          </div>
+          <div>
+            <h3>Cenove triedy</h3>
+            <div class="card-grid cols-4">
+              <div class="card"><strong>Ekonomicka</strong><p class="mini-note">do 699 EUR</p></div>
+              <div class="card"><strong>Stredna</strong><p class="mini-note">700 - 1099 EUR</p></div>
+              <div class="card"><strong>Premium</strong><p class="mini-note">1100 - 1699 EUR</p></div>
+              <div class="card"><strong>Luxus</strong><p class="mini-note">1700+ EUR</p></div>
+            </div>
+          </div>
+          <div>
+            <h3>Top znacky</h3>
+            <div class="chip-row">
+              <span class="chip">Daikin</span>
+              <span class="chip">Samsung</span>
+              <span class="chip">TCL</span>
+              <span class="chip">Midea</span>
+              <span class="chip">GREE</span>
+              <span class="chip">AUX</span>
+            </div>
+          </div>
+        </div>
+        <div class="side-stack">
+          <div class="panel">
+            <h3>AI sprievodca Dreamairko</h3>
+            <p>Zapnite hlasove vedenie a nechajte si poradit v kazdom kroku.</p>
+            <div class="ai-card">
+              <div class="ai-row">
+                <span>Hlasovy rezim</span>
+                <span class="toggle on"></span>
+              </div>
+              <div class="ai-row" style="margin-top:10px;">
+                <span>Automaticke otazky</span>
+                <span class="toggle on"></span>
+              </div>
+              <div class="mini-note">AI sumarizuje rozhodnutia po kazdom kroku.</div>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Prehlad</h3>
+            <div class="summary-list">
+              <span class="summary-pill">Rezimu: Manual + AI</span>
+              <span class="summary-pill">Jazyk: SK</span>
+              <span class="summary-pill">Mena: EUR</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-actions">
+        <div class="btn-row">
+          <button class="btn ghost">Spat</button>
+          <button class="btn primary">Dalej</button>
+        </div>
+        <button class="btn">Ulozit a pokracovat neskor</button>
+      </div>
+    </section>
+
+    <!-- Step 2 -->
+    <section class="screen">
+      <div class="screen-head">
+        <div class="brand">
+          <div class="logo">DA</div>
+          <div>
+            <div class="brand-title">Dream Air</div>
+            <div class="brand-sub">Zakaznicky konfigurator</div>
+          </div>
+        </div>
+        <div class="head-right">
+          <div class="stepper">
+            <div class="step-dot">1</div>
+            <div class="step-dot active">2</div>
+            <div class="step-dot">3</div>
+            <div class="step-dot">4</div>
+            <div class="step-dot">5</div>
+            <div class="step-dot">6</div>
+            <div class="step-dot">7</div>
+            <div class="step-dot">8</div>
+            <div class="step-dot">9</div>
+            <div class="step-dot">10</div>
+            <div class="step-dot">11</div>
+            <div class="step-dot">12</div>
+          </div>
+          <div class="mode-chip">App mode</div>
+        </div>
+      </div>
+      <div class="step-label">Krok 2 / 12 - Typ priestoru</div>
+      <div class="screen-body">
+        <div class="panel">
+          <h2>Akym typom priestoru chladite?</h2>
+          <p>Pomozte nam nastavit spravny scenar vypoctu a odporucanie vykonu.</p>
+          <div>
+            <h3>Typ priestoru</h3>
+            <div class="card-grid cols-4">
+              <div class="card"><strong>Byt</strong><p class="mini-note">najcastejsi scenar</p></div>
+              <div class="card"><strong>Dom</strong><p class="mini-note">viac miestnosti</p></div>
+              <div class="card"><strong>Firma</strong><p class="mini-note">kancelarske priestory</p></div>
+              <div class="card"><strong>Obchod</strong><p class="mini-note">vysoka navstevnost</p></div>
+            </div>
+          </div>
+          <div>
+            <h3>Typ miestnosti</h3>
+            <div class="chip-row">
+              <span class="chip active">Obyvacka</span>
+              <span class="chip">Spalna</span>
+              <span class="chip">Kancelaria</span>
+              <span class="chip">Iny priestor</span>
+            </div>
+          </div>
+          <div class="info-card">V pripade viacerych miestnosti prejdeme na multi-split scenar.</div>
+        </div>
+        <div class="side-stack">
+          <div class="panel">
+            <h3>Prehlad volieb</h3>
+            <div class="summary-list">
+              <span class="summary-pill">Priestor: Byt</span>
+              <span class="summary-pill">Miestnost: Obyvacka</span>
+              <span class="summary-pill">Rezervacia: Este nie</span>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>AI sprievodca</h3>
+            <p>Pokial si nie ste isty, spytajte sa Dreamairka.</p>
+            <button class="btn primary" style="width:100%;">Spustit AI otazky</button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-actions">
+        <div class="btn-row">
+          <button class="btn ghost">Spat</button>
+          <button class="btn primary">Dalej</button>
+        </div>
+        <button class="btn">Ulozit a pokracovat neskor</button>
+      </div>
+    </section>
+    <!-- Step 3 -->
+    <section class="screen">
+      <div class="screen-head">
+        <div class="brand">
+          <div class="logo">DA</div>
+          <div>
+            <div class="brand-title">Dream Air</div>
+            <div class="brand-sub">Zakaznicky konfigurator</div>
+          </div>
+        </div>
+        <div class="head-right">
+          <div class="stepper">
+            <div class="step-dot">1</div>
+            <div class="step-dot">2</div>
+            <div class="step-dot active">3</div>
+            <div class="step-dot">4</div>
+            <div class="step-dot">5</div>
+            <div class="step-dot">6</div>
+            <div class="step-dot">7</div>
+            <div class="step-dot">8</div>
+            <div class="step-dot">9</div>
+            <div class="step-dot">10</div>
+            <div class="step-dot">11</div>
+            <div class="step-dot">12</div>
+          </div>
+          <div class="mode-chip">App mode</div>
+        </div>
+      </div>
+      <div class="step-label">Krok 3 / 12 - Parametre miestnosti</div>
+      <div class="screen-body">
+        <div class="panel">
+          <h2>Napiste nam detaily o miestnosti</h2>
+          <p>Na zaklade tychto udajov vypocitame idealny vykon a spotrebu.</p>
+          <div class="form-grid">
+            <div class="field"><label>Plocha</label><span>25 m2</span></div>
+            <div class="field"><label>Vyska stropu</label><span>2.7 m</span></div>
+            <div class="field"><label>Orientacia okien</label><span>Juh</span></div>
+            <div class="field"><label>Izolacia</label><span>Stredna</span></div>
+            <div class="field"><label>Pocet osob</label><span>2 osoby</span></div>
+            <div class="field"><label>Typ okien</label><span>Velke presklenie</span></div>
+          </div>
+          <div class="info-card">Vacsia plocha alebo viac osob zvysuje potrebny vykon o 10-20 %.</div>
+        </div>
+        <div class="side-stack">
+          <div class="panel">
+            <h3>Ako to ovplyvni vykon</h3>
+            <div class="summary-list">
+              <span class="summary-pill">+0.4 kW za presklenie</span>
+              <span class="summary-pill">+0.2 kW za 2 osoby</span>
+              <span class="summary-pill">Izolacia: neutral</span>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>AI sprievodca</h3>
+            <p>Chcete vysvetlit ako pocitame vykon?</p>
+            <button class="btn">Zobrazit vysvetlenie</button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-actions">
+        <div class="btn-row">
+          <button class="btn ghost">Spat</button>
+          <button class="btn primary">Dalej</button>
+        </div>
+        <button class="btn">Ulozit a pokracovat neskor</button>
+      </div>
+    </section>
+
+    <!-- Step 4 -->
+    <section class="screen">
+      <div class="screen-head">
+        <div class="brand">
+          <div class="logo">DA</div>
+          <div>
+            <div class="brand-title">Dream Air</div>
+            <div class="brand-sub">Zakaznicky konfigurator</div>
+          </div>
+        </div>
+        <div class="head-right">
+          <div class="stepper">
+            <div class="step-dot">1</div>
+            <div class="step-dot">2</div>
+            <div class="step-dot">3</div>
+            <div class="step-dot active">4</div>
+            <div class="step-dot">5</div>
+            <div class="step-dot">6</div>
+            <div class="step-dot">7</div>
+            <div class="step-dot">8</div>
+            <div class="step-dot">9</div>
+            <div class="step-dot">10</div>
+            <div class="step-dot">11</div>
+            <div class="step-dot">12</div>
+          </div>
+          <div class="mode-chip">App mode</div>
+        </div>
+      </div>
+      <div class="step-label">Krok 4 / 12 - Odporucany vykon</div>
+      <div class="screen-body">
+        <div class="panel">
+          <h2>Odporucany vykon pre vasu miestnost</h2>
+          <p>Na zaklade zadanych parametrov odporucame tento rozsah vykonu.</p>
+          <div class="card">
+            <strong>Odporucany rozsah</strong>
+            <div class="price-total">3.5 - 5.0 kW</div>
+            <div class="range-bar" style="margin-top:12px;">
+              <div class="range-fill"></div>
+            </div>
+            <div class="mini-note">Zohladnili sme izolaciu, orientaciu a pocet osob.</div>
+          </div>
+          <div class="card-grid cols-3">
+            <div class="card"><strong>Standard</strong><p class="mini-note">3.5 kW</p></div>
+            <div class="card"><strong>Komfort</strong><p class="mini-note">4.2 kW</p></div>
+            <div class="card"><strong>Vyssia rezerva</strong><p class="mini-note">5.0 kW</p></div>
+          </div>
+        </div>
+        <div class="side-stack">
+          <div class="panel">
+            <h3>Co ovplyvnilo odporucanie</h3>
+            <div class="summary-list">
+              <span class="summary-pill">Plocha 25 m2</span>
+              <span class="summary-pill">Juzna orientacia</span>
+              <span class="summary-pill">2 osoby</span>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Akcia</h3>
+            <button class="btn primary" style="width:100%;">Pouzit odporucanie</button>
+            <button class="btn ghost" style="width:100%; margin-top:10px;">Upravit manualne</button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-actions">
+        <div class="btn-row">
+          <button class="btn ghost">Spat</button>
+          <button class="btn primary">Dalej</button>
+        </div>
+        <button class="btn">Ulozit a pokracovat neskor</button>
+      </div>
+    </section>
+    <!-- Step 5 -->
+    <section class="screen">
+      <div class="screen-head">
+        <div class="brand">
+          <div class="logo">DA</div>
+          <div>
+            <div class="brand-title">Dream Air</div>
+            <div class="brand-sub">Zakaznicky konfigurator</div>
+          </div>
+        </div>
+        <div class="head-right">
+          <div class="stepper">
+            <div class="step-dot">1</div>
+            <div class="step-dot">2</div>
+            <div class="step-dot">3</div>
+            <div class="step-dot">4</div>
+            <div class="step-dot active">5</div>
+            <div class="step-dot">6</div>
+            <div class="step-dot">7</div>
+            <div class="step-dot">8</div>
+            <div class="step-dot">9</div>
+            <div class="step-dot">10</div>
+            <div class="step-dot">11</div>
+            <div class="step-dot">12</div>
+          </div>
+          <div class="mode-chip">App mode</div>
+        </div>
+      </div>
+      <div class="step-label">Krok 5 / 12 - Technicke preferencie</div>
+      <div class="screen-body">
+        <div class="panel">
+          <h2>Ake technicke preferencie mate?</h2>
+          <p>Filtrovanie podla hlucnosti, ucinnosti a smart funkcii.</p>
+          <div class="card">
+            <h3>Hlucnost</h3>
+            <div class="chip-row">
+              <span class="chip">Standard</span>
+              <span class="chip active">Tichy rezim</span>
+              <span class="chip">Ultra tichy</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Energeticka ucinnost</h3>
+            <div class="range-bar">
+              <div class="range-fill" style="width:75%;"></div>
+            </div>
+            <div class="mini-note">Preferujem triedu A++ alebo vyssie.</div>
+          </div>
+          <div class="card">
+            <h3>Smart funkcie</h3>
+            <div class="toggle-row">
+              <span>Wi-Fi ovladanie</span>
+              <span class="toggle on"></span>
+            </div>
+            <div class="toggle-row">
+              <span>Smart home integracia</span>
+              <span class="toggle"></span>
+            </div>
+            <div class="toggle-row">
+              <span>Pokrocila filtracia</span>
+              <span class="toggle on"></span>
+            </div>
+          </div>
+        </div>
+        <div class="side-stack">
+          <div class="panel">
+            <h3>Aktivne filtre</h3>
+            <div class="summary-list">
+              <span class="summary-pill">Tichy rezim</span>
+              <span class="summary-pill">A++ ucinnost</span>
+              <span class="summary-pill">Wi-Fi, filtracia</span>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Tip od Dreamairka</h3>
+            <p>Pri spalni odporucame hlu?nost pod 20 dB a tichy no?n? re?im.</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-actions">
+        <div class="btn-row">
+          <button class="btn ghost">Spat</button>
+          <button class="btn primary">Dalej</button>
+        </div>
+        <button class="btn">Ulozit a pokracovat neskor</button>
+      </div>
+    </section>
+
+    <!-- Step 6 -->
+    <section class="screen">
+      <div class="screen-head">
+        <div class="brand">
+          <div class="logo">DA</div>
+          <div>
+            <div class="brand-title">Dream Air</div>
+            <div class="brand-sub">Zakaznicky konfigurator</div>
+          </div>
+        </div>
+        <div class="head-right">
+          <div class="stepper">
+            <div class="step-dot">1</div>
+            <div class="step-dot">2</div>
+            <div class="step-dot">3</div>
+            <div class="step-dot">4</div>
+            <div class="step-dot">5</div>
+            <div class="step-dot active">6</div>
+            <div class="step-dot">7</div>
+            <div class="step-dot">8</div>
+            <div class="step-dot">9</div>
+            <div class="step-dot">10</div>
+            <div class="step-dot">11</div>
+            <div class="step-dot">12</div>
+          </div>
+          <div class="mode-chip">App mode</div>
+        </div>
+      </div>
+      <div class="step-label">Krok 6 / 12 - Znacky a rozpocet</div>
+      <div class="screen-body">
+        <div class="panel">
+          <h2>Vyberte preferovane znacky a rozpocet</h2>
+          <p>Filtrovanie znizi pocet modelov na idealne kandidaty.</p>
+          <div>
+            <h3>Znacky</h3>
+            <div class="chip-row">
+              <span class="chip active">Daikin</span>
+              <span class="chip">Samsung</span>
+              <span class="chip active">GREE</span>
+              <span class="chip">Midea</span>
+              <span class="chip">TCL</span>
+              <span class="chip">AUX</span>
+            </div>
+          </div>
+          <div>
+            <h3>Rozpatie ceny</h3>
+            <div class="card">
+              <div class="price-row"><span>Min</span><strong>750 EUR</strong></div>
+              <div class="price-row"><span>Max</span><strong>1350 EUR</strong></div>
+              <div class="range-bar" style="margin-top:12px;">
+                <div class="range-fill" style="width:55%;"></div>
+              </div>
+            </div>
+          </div>
+          <div class="badge">Najdene modely: 18</div>
+        </div>
+        <div class="side-stack">
+          <div class="panel">
+            <h3>Vybrane filtre</h3>
+            <div class="summary-list">
+              <span class="summary-pill">Daikin, GREE</span>
+              <span class="summary-pill">Rozpatie 750-1350 EUR</span>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Co dalej?</h3>
+            <p>V dalsom kroku porovname 2-3 najlepsie modely.</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-actions">
+        <div class="btn-row">
+          <button class="btn ghost">Spat</button>
+          <button class="btn primary">Dalej</button>
+        </div>
+        <button class="btn">Ulozit a pokracovat neskor</button>
+      </div>
+    </section>
+    <!-- Step 7 -->
+    <section class="screen">
+      <div class="screen-head">
+        <div class="brand">
+          <div class="logo">DA</div>
+          <div>
+            <div class="brand-title">Dream Air</div>
+            <div class="brand-sub">Zakaznicky konfigurator</div>
+          </div>
+        </div>
+        <div class="head-right">
+          <div class="stepper">
+            <div class="step-dot">1</div>
+            <div class="step-dot">2</div>
+            <div class="step-dot">3</div>
+            <div class="step-dot">4</div>
+            <div class="step-dot">5</div>
+            <div class="step-dot">6</div>
+            <div class="step-dot active">7</div>
+            <div class="step-dot">8</div>
+            <div class="step-dot">9</div>
+            <div class="step-dot">10</div>
+            <div class="step-dot">11</div>
+            <div class="step-dot">12</div>
+          </div>
+          <div class="mode-chip">App mode</div>
+        </div>
+      </div>
+      <div class="step-label">Krok 7 / 12 - Porovnanie modelov</div>
+      <div class="screen-body">
+        <div class="panel">
+          <h2>Porovnajte 3 najlepsie modely</h2>
+          <p>Vyberte si model, ktory najlepsie zodpoveda vasim preferenciam.</p>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Vykon</th>
+                <th>Hlucnost</th>
+                <th>SEER</th>
+                <th>Wi-Fi</th>
+                <th>Cena</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Daikin Perfera</td>
+                <td>4.2 kW</td>
+                <td>19 dB</td>
+                <td>8.5</td>
+                <td>ANO</td>
+                <td>1290 EUR</td>
+              </tr>
+              <tr>
+                <td>GREE Fairy</td>
+                <td>3.5 kW</td>
+                <td>21 dB</td>
+                <td>7.9</td>
+                <td>ANO</td>
+                <td>1090 EUR</td>
+              </tr>
+              <tr>
+                <td>Samsung WindFree</td>
+                <td>4.0 kW</td>
+                <td>23 dB</td>
+                <td>8.0</td>
+                <td>ANO</td>
+                <td>1240 EUR</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="badge">Odporucame: Daikin Perfera</div>
+        </div>
+        <div class="side-stack">
+          <div class="panel">
+            <h3>Porovnanie bodov</h3>
+            <div class="summary-list">
+              <span class="summary-pill">Najtichsie: Daikin</span>
+              <span class="summary-pill">Najlepsia cena: GREE</span>
+              <span class="summary-pill">Najvyssia ucinnost: Daikin</span>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Akcia</h3>
+            <button class="btn primary" style="width:100%;">Vybrat Daikin Perfera</button>
+            <button class="btn" style="width:100%; margin-top:10px;">Porovnat viac</button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-actions">
+        <div class="btn-row">
+          <button class="btn ghost">Spat</button>
+          <button class="btn primary">Dalej</button>
+        </div>
+        <button class="btn">Ulozit a pokracovat neskor</button>
+      </div>
+    </section>
+
+    <!-- Step 8 -->
+    <section class="screen">
+      <div class="screen-head">
+        <div class="brand">
+          <div class="logo">DA</div>
+          <div>
+            <div class="brand-title">Dream Air</div>
+            <div class="brand-sub">Zakaznicky konfigurator</div>
+          </div>
+        </div>
+        <div class="head-right">
+          <div class="stepper">
+            <div class="step-dot">1</div>
+            <div class="step-dot">2</div>
+            <div class="step-dot">3</div>
+            <div class="step-dot">4</div>
+            <div class="step-dot">5</div>
+            <div class="step-dot">6</div>
+            <div class="step-dot">7</div>
+            <div class="step-dot active">8</div>
+            <div class="step-dot">9</div>
+            <div class="step-dot">10</div>
+            <div class="step-dot">11</div>
+            <div class="step-dot">12</div>
+          </div>
+          <div class="mode-chip">App mode</div>
+        </div>
+      </div>
+      <div class="step-label">Krok 8 / 12 - Dream Air Care baliky</div>
+      <div class="screen-body">
+        <div class="panel">
+          <h2>Vyberte si servisny balik</h2>
+          <p>Baliky zvysuju zaruku a starostlivost po montazi.</p>
+          <div class="card-grid cols-3">
+            <div class="package">
+              <strong>Basic</strong>
+              <p class="mini-note">1x servis / rok</p>
+              <div class="price-total">+0 EUR</div>
+            </div>
+            <div class="package highlight">
+              <strong>Comfort</strong>
+              <p class="mini-note">2x servis / rok + prednostne terminy</p>
+              <div class="price-total">+89 EUR</div>
+            </div>
+            <div class="package">
+              <strong>Premium</strong>
+              <p class="mini-note">3x servis / rok + predlzena zaruka</p>
+              <div class="price-total">+149 EUR</div>
+            </div>
+          </div>
+          <div class="info-card">Balik Comfort predlzuje zaruku o 2 roky.</div>
+        </div>
+        <div class="side-stack">
+          <div class="panel">
+            <h3>Vybrane</h3>
+            <div class="summary-list">
+              <span class="summary-pill">Model: Daikin Perfera</span>
+              <span class="summary-pill">Balik: Comfort</span>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>AI sprievodca</h3>
+            <p>Nechajte si vysvetlit rozdiely v balickoch.</p>
+            <button class="btn">Poradit s vyberom</button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-actions">
+        <div class="btn-row">
+          <button class="btn ghost">Spat</button>
+          <button class="btn primary">Dalej</button>
+        </div>
+        <button class="btn">Ulozit a pokracovat neskor</button>
+      </div>
+    </section>
+    <!-- Step 9 -->
+    <section class="screen">
+      <div class="screen-head">
+        <div class="brand">
+          <div class="logo">DA</div>
+          <div>
+            <div class="brand-title">Dream Air</div>
+            <div class="brand-sub">Zakaznicky konfigurator</div>
+          </div>
+        </div>
+        <div class="head-right">
+          <div class="stepper">
+            <div class="step-dot">1</div>
+            <div class="step-dot">2</div>
+            <div class="step-dot">3</div>
+            <div class="step-dot">4</div>
+            <div class="step-dot">5</div>
+            <div class="step-dot">6</div>
+            <div class="step-dot">7</div>
+            <div class="step-dot">8</div>
+            <div class="step-dot active">9</div>
+            <div class="step-dot">10</div>
+            <div class="step-dot">11</div>
+            <div class="step-dot">12</div>
+          </div>
+          <div class="mode-chip">App mode</div>
+        </div>
+      </div>
+      <div class="step-label">Krok 9 / 12 - Cenova ponuka</div>
+      <div class="screen-body">
+        <div class="panel">
+          <h2>Transparentna cenova ponuka</h2>
+          <p>Cenu zariadenia a montaze uvadzame oddelene.</p>
+          <div class="card">
+            <div class="price-row"><span>Cena zariadenia</span><strong>1 290 EUR</strong></div>
+            <div class="price-row"><span>Standardna montaz</span><strong>350 EUR</strong></div>
+            <div class="price-row"><span>Odhad nadstandardu</span><strong>90 EUR</strong></div>
+            <div class="price-row"><span>DPH</span><strong>220 EUR</strong></div>
+            <div class="price-row"><span>Spolu</span><strong class="price-total">1 950 EUR</strong></div>
+          </div>
+          <div class="info-card">Nadstandardne montazne prace su orientacne do technickeho potvrdenia.</div>
+        </div>
+        <div class="side-stack">
+          <div class="panel">
+            <h3>Obsah balicka</h3>
+            <div class="summary-list">
+              <span class="summary-pill">Model: Daikin Perfera</span>
+              <span class="summary-pill">Balik: Comfort</span>
+              <span class="summary-pill">Montaz: Standard</span>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Co dalej?</h3>
+            <p>Vyplnime montazny dotaznik, aby sme upresnili cenu.</p>
+            <button class="btn primary">Prejst na dotaznik</button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-actions">
+        <div class="btn-row">
+          <button class="btn ghost">Spat</button>
+          <button class="btn primary">Dalej</button>
+        </div>
+        <button class="btn">Ulozit a pokracovat neskor</button>
+      </div>
+    </section>
+
+    <!-- Step 10 -->
+    <section class="screen">
+      <div class="screen-head">
+        <div class="brand">
+          <div class="logo">DA</div>
+          <div>
+            <div class="brand-title">Dream Air</div>
+            <div class="brand-sub">Zakaznicky konfigurator</div>
+          </div>
+        </div>
+        <div class="head-right">
+          <div class="stepper">
+            <div class="step-dot">1</div>
+            <div class="step-dot">2</div>
+            <div class="step-dot">3</div>
+            <div class="step-dot">4</div>
+            <div class="step-dot">5</div>
+            <div class="step-dot">6</div>
+            <div class="step-dot">7</div>
+            <div class="step-dot">8</div>
+            <div class="step-dot">9</div>
+            <div class="step-dot active">10</div>
+            <div class="step-dot">11</div>
+            <div class="step-dot">12</div>
+          </div>
+          <div class="mode-chip">App mode</div>
+        </div>
+      </div>
+      <div class="step-label">Krok 10 / 12 - Montazny dotaznik</div>
+      <div class="screen-body">
+        <div class="panel">
+          <h2>Montazny dotaznik a foto</h2>
+          <p>Pomozte nam odhadnut nadstandardne prace.</p>
+          <div class="checklist">
+            <div class="check-item"><span class="check-box"></span><span>Trasa nad 3 m</span></div>
+            <div class="check-item"><span class="check-box"></span><span>Druhy prestup stenou</span></div>
+            <div class="check-item"><span class="check-box"></span><span>Jadrovy prieraz beton/panel</span></div>
+            <div class="check-item"><span class="check-box"></span><span>Zhorseny pristup / vyska</span></div>
+            <div class="check-item"><span class="check-box"></span><span>Potrebujem kondenzacne cerpadlo</span></div>
+          </div>
+          <div class="card">
+            <strong>Nahrat fotografie (volitelne)</strong>
+            <p class="mini-note">Priestor, fasada, miesto pre vonkajsiu jednotku.</p>
+            <button class="btn">Pridat fotky</button>
+          </div>
+        </div>
+        <div class="side-stack">
+          <div class="panel">
+            <h3>Odhad doplatkov</h3>
+            <div class="summary-list">
+              <span class="summary-pill">Trasa nad 3 m: +60 EUR</span>
+              <span class="summary-pill">Prieraz: +99 EUR</span>
+              <span class="summary-pill">Spolu odhad: 159 EUR</span>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Upozornenie</h3>
+            <p>Nadstandardne doplatky su orientacne do potvrdenia technikom.</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-actions">
+        <div class="btn-row">
+          <button class="btn ghost">Spat</button>
+          <button class="btn primary">Dalej</button>
+        </div>
+        <button class="btn">Ulozit a pokracovat neskor</button>
+      </div>
+    </section>
+    <!-- Step 11 -->
+    <section class="screen">
+      <div class="screen-head">
+        <div class="brand">
+          <div class="logo">DA</div>
+          <div>
+            <div class="brand-title">Dream Air</div>
+            <div class="brand-sub">Zakaznicky konfigurator</div>
+          </div>
+        </div>
+        <div class="head-right">
+          <div class="stepper">
+            <div class="step-dot">1</div>
+            <div class="step-dot">2</div>
+            <div class="step-dot">3</div>
+            <div class="step-dot">4</div>
+            <div class="step-dot">5</div>
+            <div class="step-dot">6</div>
+            <div class="step-dot">7</div>
+            <div class="step-dot">8</div>
+            <div class="step-dot">9</div>
+            <div class="step-dot">10</div>
+            <div class="step-dot active">11</div>
+            <div class="step-dot">12</div>
+          </div>
+          <div class="mode-chip">App mode</div>
+        </div>
+      </div>
+      <div class="step-label">Krok 11 / 12 - Rezervacia terminu</div>
+      <div class="screen-body">
+        <div class="panel">
+          <h2>Vyberte termin montaze</h2>
+          <p>Rezervacia terminu cez Cal.com alebo Calendly.</p>
+          <div class="card">
+            <strong>Marec 2026</strong>
+            <div class="calendar" style="margin-top:12px;">
+              <div>Po</div><div>Ut</div><div>St</div><div>Stv</div><div>Pi</div><div>So</div><div>Ne</div>
+              <div>1</div><div>2</div><div>3</div><div>4</div><div class="active">5</div><div>6</div><div>7</div>
+              <div>8</div><div>9</div><div>10</div><div>11</div><div>12</div><div>13</div><div>14</div>
+              <div>15</div><div>16</div><div>17</div><div class="active">18</div><div>19</div><div>20</div><div>21</div>
+            </div>
+          </div>
+          <div class="card">
+            <strong>Platba zalohy</strong>
+            <p class="mini-note">Zaloha za zariadenie: 200 EUR</p>
+            <button class="btn primary">Zaplatit zalohu</button>
+          </div>
+        </div>
+        <div class="side-stack">
+          <div class="panel">
+            <h3>Rezervacny sumar</h3>
+            <div class="summary-list">
+              <span class="summary-pill">Termin: 5.3.2026</span>
+              <span class="summary-pill">Cas: 09:30</span>
+              <span class="summary-pill">Zaloha: 200 EUR</span>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Kontakty</h3>
+            <p>Kontaktny email a telefon pre potvrdenie terminu.</p>
+            <button class="btn">Upravit kontakt</button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-actions">
+        <div class="btn-row">
+          <button class="btn ghost">Spat</button>
+          <button class="btn primary">Dalej</button>
+        </div>
+        <button class="btn">Ulozit a pokracovat neskor</button>
+      </div>
+    </section>
+
+    <!-- Step 12 -->
+    <section class="screen">
+      <div class="screen-head">
+        <div class="brand">
+          <div class="logo">DA</div>
+          <div>
+            <div class="brand-title">Dream Air</div>
+            <div class="brand-sub">Zakaznicky konfigurator</div>
+          </div>
+        </div>
+        <div class="head-right">
+          <div class="stepper">
+            <div class="step-dot">1</div>
+            <div class="step-dot">2</div>
+            <div class="step-dot">3</div>
+            <div class="step-dot">4</div>
+            <div class="step-dot">5</div>
+            <div class="step-dot">6</div>
+            <div class="step-dot">7</div>
+            <div class="step-dot">8</div>
+            <div class="step-dot">9</div>
+            <div class="step-dot">10</div>
+            <div class="step-dot">11</div>
+            <div class="step-dot active">12</div>
+          </div>
+          <div class="mode-chip">App mode</div>
+        </div>
+      </div>
+      <div class="step-label">Krok 12 / 12 - Potvrdenie</div>
+      <div class="screen-body">
+        <div class="panel">
+          <h2>Vasa objednavka je potvrdena</h2>
+          <p>Poslali sme vam email s rekapitulaciou a PDF ponukou.</p>
+          <div class="success">
+            <div class="success-icon">OK</div>
+            <div>
+              <strong>Objednavka #DA-2026-0318</strong>
+              <div class="mini-note">Stav: Rezervovane, caka na technicke potvrdenie</div>
+            </div>
+          </div>
+          <div class="card">
+            <strong>Stiahnut PDF ponuku</strong>
+            <p class="mini-note">Transparentny rozpis ceny a zmluvne podmienky.</p>
+            <button class="btn primary">Stiahnut PDF</button>
+          </div>
+          <div class="info-card">Montazne doplatky zostavaju orientacne do potvrdenia technikom.</div>
+        </div>
+        <div class="side-stack">
+          <div class="panel">
+            <h3>Co sa bude diat dalej</h3>
+            <div class="summary-list">
+              <span class="summary-pill">Email potvrdenie do 5 minut</span>
+              <span class="summary-pill">Kontakt technika do 24 hodin</span>
+              <span class="summary-pill">Finalna faktura po schvaleni doplatkov</span>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Potrebujete pomoc?</h3>
+            <p>Chat alebo telefonicka podpora Dream Air.</p>
+            <button class="btn">Kontaktovat podporu</button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-actions">
+        <div class="btn-row">
+          <button class="btn ghost">Spat</button>
+          <button class="btn primary">Dokoncit</button>
+        </div>
+        <button class="btn">Ulozit a pokracovat neskor</button>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

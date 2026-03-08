@@ -1,0 +1,13 @@
+- generic [ref=e2]:
+  - generic [ref=e5]:
+    - heading "Vaše pripojenie nie je súkromné" [level=1] [ref=e6]
+    - paragraph [ref=e7]:
+      - text: Útočníci sa pravdepodobne pokúšajú ukradnúť vaše informácie z webu
+      - strong [ref=e8]: app.dreamair.sk
+      - text: (napríklad heslá, správy alebo čísla kreditných kariet).
+      - link "Ďalšie informácie o tomto upozornení" [ref=e9] [cursor=pointer]:
+        - /url: "#"
+    - button "net::ERR_CERT_COMMON_NAME_INVALID" [ref=e11]
+  - generic [ref=e12]:
+    - button "Späť do bezpečia" [ref=e13] [cursor=pointer]
+    - button "Rozšírené" [ref=e14] [cursor=pointer]

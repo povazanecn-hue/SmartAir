@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "figma-ai-designer": {
+      "command": "npx",
+      "args": ["-y", "figma-ai-designer"]
+    }
+  }
+}

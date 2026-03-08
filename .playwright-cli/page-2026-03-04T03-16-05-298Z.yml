@@ -1,0 +1,126 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - heading "Klimatizácie a vzduchotechnika" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Vyberte si z našej ponuky prémiových klimatizácií
+  - generic [ref=e7]:
+    - button "Kategória" [ref=e9] [cursor=pointer]:
+      - text: Kategória
+      - img [ref=e10]
+    - button "Značka" [ref=e13] [cursor=pointer]:
+      - text: Značka
+      - img [ref=e14]
+    - button "Cena" [ref=e17] [cursor=pointer]:
+      - text: Cena
+      - img [ref=e18]
+    - button "Energ. trieda" [ref=e21] [cursor=pointer]:
+      - text: Energ. trieda
+      - img [ref=e22]
+    - button "Typ inštalácie" [ref=e25] [cursor=pointer]:
+      - text: Typ inštalácie
+      - img [ref=e26]
+    - generic [ref=e28]:
+      - generic [ref=e29] [cursor=pointer]: A+++
+      - generic [ref=e30] [cursor=pointer]: Novinka
+      - generic [ref=e31] [cursor=pointer]: Akcia
+    - button "Vymazať" [ref=e33] [cursor=pointer]
+  - generic [ref=e35]: "Aktívne:"
+  - generic [ref=e36]:
+    - generic [ref=e37]:
+      - text: Nájdených
+      - strong [ref=e38]: "44"
+      - text: produktov
+    - generic [ref=e39]:
+      - generic [ref=e40]:
+        - button "Mriežka" [ref=e41] [cursor=pointer]:
+          - img [ref=e42]
+        - button "Zoznam" [ref=e44] [cursor=pointer]:
+          - img [ref=e45]
+      - generic [ref=e47]:
+        - generic [ref=e48]: "Zoradiť:"
+        - combobox "Zoradiť:" [ref=e49] [cursor=pointer]:
+          - option "Najobľúbenejšie" [selected]
+          - 'option "Cena: od najnižšej"'
+          - 'option "Cena: od najvyššej"'
+          - 'option "Názov: A-Z"'
+          - option "Najnovšie"
+  - generic [ref=e50]:
+    - article [ref=e51]:
+      - generic [ref=e52]:
+        - img "Daikin Perfera" [ref=e53]
+        - generic [ref=e55]: Novinka
+        - generic [ref=e56]: A+++
+      - generic [ref=e57]:
+        - generic [ref=e58]: Daikin
+        - heading "Perfera FTXM35R" [level=3] [ref=e59]
+        - generic [ref=e60]: Klimatizácie Daikin Biela 3.5 A+++ 1500-2000€ Nástenná
+        - generic [ref=e61]:
+          - generic [ref=e62]:
+            - img [ref=e63]
+            - text: 3.5 kW
+          - generic [ref=e65]: 35 m²
+        - generic [ref=e66]:
+          - generic [ref=e67]: 1 590 €
+          - generic [ref=e68]:
+            - link "Detail" [ref=e69] [cursor=pointer]:
+              - /url: "#"
+            - button "Pridať do dopytu" [ref=e70] [cursor=pointer]
+    - article [ref=e71]:
+      - generic [ref=e72]:
+        - img "Mitsubishi" [ref=e73]
+        - generic [ref=e75]: Eko
+        - generic [ref=e76]: A+++
+      - generic [ref=e77]:
+        - generic [ref=e78]: Mitsubishi
+        - heading "MSZ-LN35VG Designer" [level=3] [ref=e79]
+        - generic [ref=e80]: Klimatizácie Mitsubishi Strieborná 3.5 A+++ 1500-2000€ Nástenná
+        - generic [ref=e81]:
+          - generic [ref=e82]:
+            - img [ref=e83]
+            - text: 3.5 kW
+          - generic [ref=e85]: 40 m²
+        - generic [ref=e86]:
+          - generic [ref=e87]: 1 890 €
+          - generic [ref=e88]:
+            - link "Detail" [ref=e89] [cursor=pointer]:
+              - /url: "#"
+            - button "Pridať do dopytu" [ref=e90] [cursor=pointer]
+    - article [ref=e91]:
+      - generic [ref=e92]:
+        - img "LG Artcool" [ref=e93]
+        - generic [ref=e95]: "-15%"
+        - generic [ref=e96]: A++
+      - generic [ref=e97]:
+        - generic [ref=e98]: LG
+        - heading "Artcool Gallery A12FT" [level=3] [ref=e99]
+        - generic [ref=e100]: Klimatizácie LG Čierna 3.5 A++ 1000-1500€ Nástenná
+        - generic [ref=e101]:
+          - generic [ref=e102]:
+            - img [ref=e103]
+            - text: 3.5 kW
+          - generic [ref=e105]: 35 m²
+        - generic [ref=e106]:
+          - generic [ref=e107]: 1 290 € 1 099 €
+          - generic [ref=e108]:
+            - link "Detail" [ref=e109] [cursor=pointer]:
+              - /url: "#"
+            - button "Pridať do dopytu" [ref=e110] [cursor=pointer]
+    - article [ref=e111]:
+      - generic [ref=e112]:
+        - img "Samsung WindFree" [ref=e113]
+        - generic [ref=e114]: A++
+      - generic [ref=e115]:
+        - generic [ref=e116]: Samsung
+        - heading "WindFree Elite" [level=3] [ref=e117]
+        - generic [ref=e118]: Klimatizácie Samsung Biela 2.5 A++ do 1000€ Nástenná
+        - generic [ref=e119]:
+          - generic [ref=e120]:
+            - img [ref=e121]
+            - text: 2.5 kW
+          - generic [ref=e123]: 25 m²
+        - generic [ref=e124]:
+          - generic [ref=e125]: 999 €
+          - generic [ref=e126]:
+            - link "Detail" [ref=e127] [cursor=pointer]:
+              - /url: "#"
+            - button "Pridať do dopytu" [ref=e128] [cursor=pointer]
+  - button "Načítať ďalšie produkty" [ref=e130] [cursor=pointer]

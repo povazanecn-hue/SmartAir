@@ -1,0 +1,165 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MenuMat redesign - pokračovanie" [level=1] [ref=e4]
+    - paragraph [ref=e5]: "Dopracované 3 vizuálne smery pre desktop editor denného menu: Amber Glass, Linen Luxe a Obsidian Spark. Verzia je vyčistená (bez obrovského base64 bloku), s opravenou diakritikou a responzívnym správaním pre menšie obrazovky."
+  - region "Výsledky hodnotenia variantov" [ref=e6]:
+    - article [ref=e7]:
+      - heading "Variant A · Amber Glass" [level=3] [ref=e8]
+      - paragraph [ref=e9]: Silný vizuálny charakter, veľmi dobré CTA a vhodné pre prémiové gastro koncepty.
+      - generic [ref=e10]: Skóre 8.6/10
+    - article [ref=e11]:
+      - heading "Variant B · Linen Luxe" [level=3] [ref=e12]
+      - paragraph [ref=e13]: Najlepšia čitateľnosť počas dňa, čisté print/export flow a najnižší kognitívny šum.
+      - generic [ref=e14]: Odporúčaný smer
+    - article [ref=e15]:
+      - heading "Variant C · Obsidian Spark" [level=3] [ref=e16]
+      - paragraph [ref=e17]: Power dashboard look pre nočné služby a monitoring, výrazný kontrast pre rýchlu orientáciu.
+      - generic [ref=e18]: Skóre 8.2/10
+  - generic [ref=e19]:
+    - generic [ref=e20]: Variant A - Amber Glass
+    - generic [ref=e21]:
+      - generic [ref=e22]:
+        - heading "Denné menu · Editor" [level=2] [ref=e25]
+        - generic [ref=e26]:
+          - generic [ref=e27]: AI asistent Olívia
+          - button "Publikovať koncepty" [ref=e28] [cursor=pointer]
+      - generic [ref=e29]:
+        - generic [ref=e30]:
+          - article [ref=e31]:
+            - generic [ref=e32]:
+              - paragraph [ref=e33]: Pondelok 23. februára
+              - generic [ref=e34]: Koncept
+            - generic [ref=e35]:
+              - paragraph [ref=e36]: Cesnaková polievka
+              - paragraph [ref=e37]: 4.90 €
+              - paragraph [ref=e38]: Kurací steak so zeleninou
+              - paragraph [ref=e39]: 9.90 €
+              - paragraph [ref=e40]: Vyprážaný rezeň s hranolkami
+              - paragraph [ref=e41]: 9.50 €
+              - paragraph [ref=e42]: Palacinky s džemom
+              - paragraph [ref=e43]: 4.50 €
+            - generic [ref=e44]:
+              - button "Pridať jedlo" [ref=e45] [cursor=pointer]
+              - paragraph [ref=e46]: "Publikované: 0 · Koncepty: 5"
+          - article [ref=e47]:
+            - generic [ref=e48]:
+              - paragraph [ref=e49]: Cenový engine
+              - paragraph [ref=e50]: Marža 120 %
+            - slider [ref=e51]: "120"
+            - generic [ref=e52]:
+              - generic [ref=e53]:
+                - paragraph [ref=e54]: Odporúčaná cena
+                - paragraph [ref=e55]: 7.20 €
+              - generic [ref=e56]:
+                - paragraph [ref=e57]: Finálna cena
+                - paragraph [ref=e58]: 8.90 €
+        - complementary [ref=e59]:
+          - paragraph [ref=e60]: AI Olívia
+          - paragraph [ref=e61]: Potrebujete nákupný zoznam, export alebo navýšenie marže? Napíšte.
+          - generic [ref=e62]:
+            - paragraph [ref=e63]: Generuj nákupný zoznam
+            - paragraph [ref=e64]: Základ pre dnešné menu + rezerva 10 %
+          - generic [ref=e65]:
+            - paragraph [ref=e66]: Export pre kuchyňu
+            - paragraph [ref=e67]: TV FullHD + PDF + Excel
+          - button "Napísať správu Olívii..." [ref=e68] [cursor=pointer]
+  - paragraph [ref=e69]: "A: prémiový večerný vizuál, silné CTA a atmosféra."
+  - generic [ref=e70]:
+    - generic [ref=e71]: Variant B - Linen Luxe
+    - generic [ref=e72]:
+      - generic [ref=e73]:
+        - heading "Denné menu · Kurátor ponuky" [level=2] [ref=e76]
+        - generic [ref=e77]:
+          - button "Zdieľať PDF" [ref=e78] [cursor=pointer]
+          - button "Publikovať" [ref=e79] [cursor=pointer]
+      - generic [ref=e80]:
+        - article [ref=e81]:
+          - paragraph [ref=e82]: Menu na týždeň
+          - generic [ref=e83]:
+            - generic [ref=e84]:
+              - paragraph [ref=e85]: Pondelok
+              - paragraph [ref=e86]: Cesnaková polievka
+              - paragraph [ref=e87]: Kurací steak
+            - generic [ref=e88]:
+              - paragraph [ref=e89]: Utorok
+              - paragraph [ref=e90]: Hovädzí vývar
+              - paragraph [ref=e91]: Panna cotta
+            - generic [ref=e92]:
+              - paragraph [ref=e93]: Streda
+              - paragraph [ref=e94]: Vegánsky bowl
+              - paragraph [ref=e95]: Brownie
+            - generic [ref=e96]:
+              - paragraph [ref=e97]: Štvrtok
+              - paragraph [ref=e98]: Losos s citrónom
+              - paragraph [ref=e99]: Crème brûlée
+            - generic [ref=e100]:
+              - paragraph [ref=e101]: Piatok
+              - paragraph [ref=e102]: Burger & hranolky
+              - paragraph [ref=e103]: Cheesecake
+          - generic [ref=e104]:
+            - button "Pridať jedlo" [ref=e105] [cursor=pointer]
+            - button "AI návrh jedla" [ref=e106] [cursor=pointer]
+        - complementary [ref=e107]:
+          - paragraph [ref=e108]: AI Olívia · Concierge
+          - generic [ref=e109]:
+            - paragraph [ref=e110]: Generuj nákupný zoznam
+            - paragraph [ref=e111]: Automaticky podľa menu + rezerva 8 %
+          - generic [ref=e112]:
+            - paragraph [ref=e113]: Export TV / PDF / Excel
+            - paragraph [ref=e114]: Minimal / Modern / Rustikálna šablóna
+          - generic [ref=e115]:
+            - paragraph [ref=e116]: Kontrola alergénov
+            - paragraph [ref=e117]: Zvýraznenie alergénov priamo v exporte
+          - button "Napísať Olívii..." [ref=e118] [cursor=pointer]
+  - paragraph [ref=e119]: "B: svetlý štýl pre denné prevádzky a print/export workflow."
+  - generic [ref=e120]:
+    - generic [ref=e121]: Variant C - Obsidian Spark
+    - generic [ref=e122]:
+      - generic [ref=e123]:
+        - heading "MenuMat Dashboard · Lightning" [level=2] [ref=e126]
+        - generic [ref=e127]:
+          - button "AI týždeň" [ref=e128] [cursor=pointer]
+          - button "Export" [ref=e129] [cursor=pointer]
+      - generic [ref=e130]:
+        - article [ref=e131]:
+          - generic [ref=e132]:
+            - paragraph [ref=e133]: Denné menu (koncepty)
+            - paragraph [ref=e134]: 23. feb - 27. feb 2026
+          - generic [ref=e135]:
+            - generic [ref=e136]:
+              - paragraph [ref=e137]: Po
+              - paragraph [ref=e138]: Cesnaková
+              - paragraph [ref=e139]: Kurací steak
+              - paragraph [ref=e140]: Palacinky
+            - generic [ref=e141]:
+              - paragraph [ref=e142]: Ut
+              - paragraph [ref=e143]: Hovädzí vývar
+              - paragraph [ref=e144]: Losos
+            - generic [ref=e145]:
+              - paragraph [ref=e146]: St
+              - paragraph [ref=e147]: Vegánsky bowl
+              - paragraph [ref=e148]: Brownie
+            - generic [ref=e149]:
+              - paragraph [ref=e150]: Št
+              - paragraph [ref=e151]: Burger
+              - paragraph [ref=e152]: Cheesecake
+            - generic [ref=e153]:
+              - paragraph [ref=e154]: Pi
+              - paragraph [ref=e155]: Rizoto
+              - paragraph [ref=e156]: Tiramisu
+          - generic [ref=e157]:
+            - button "Pridať jedlo" [ref=e158] [cursor=pointer]
+            - button "AI návrh" [ref=e159] [cursor=pointer]
+        - complementary [ref=e160]:
+          - paragraph [ref=e161]: AI Olívia · Rýchle akcie
+          - generic [ref=e162]:
+            - paragraph [ref=e163]: Generuj nákupný zoznam
+            - paragraph [ref=e164]: Z menu + rezerva 12 %
+          - generic [ref=e165]:
+            - paragraph [ref=e166]: Export TV / PDF / Excel
+            - paragraph [ref=e167]: Modern / Minimal / Rustikál
+          - generic [ref=e168]:
+            - paragraph [ref=e169]: Cenový engine
+            - paragraph [ref=e170]: Marža 120 % · DPH 20 %
+          - button "Napísať Olívii..." [ref=e171] [cursor=pointer]
+  - paragraph [ref=e172]: "C: nočný power režim pre high-contrast monitoring v prevádzke."
