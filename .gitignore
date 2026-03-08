@@ -23,8 +23,11 @@ htmlcov/
 .idea/
 
 # Local AI/temp artifacts
+tmpclaude-*
+tmpclaude-*-cwd
 tmpclaude-*-cwd/
 .playwright-cli/
+output/playwright/
 
 # OS
 Thumbs.db
