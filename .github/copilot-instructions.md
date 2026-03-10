@@ -16,5 +16,11 @@ Majiteľ: Mgr. Norbert Považanec.
 - Commit správy: Conventional Commits (feat:, fix:, docs:, refactor:)
 - Doppler projekt: `dreamair` – príkazy spúšťaj cez `doppler run --`
 
+## Tvrdé oddelenie projektov
+- Tento repozitár je iba pre DreamAir (`dreamair-web`).
+- Ak zadanie patrí do MENUMAT (napr. `MenuMat`, `menumat-ecb44ba0`, reštauračné menu), okamžite zastav zmeny v tomto repo.
+- V takom prípade odpovedz iba upozornením, že je potrebné prepnúť na MENUMAT repozitár.
+- Do DreamAir repozitára nepridávaj MENUMAT prototypy, dokumenty ani snapshoty.
+
 ## Dôležité
 Pred veľkými zmenami si prečítaj CLAUDE.md pre úplný kontext projektu.

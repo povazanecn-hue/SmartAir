@@ -65,6 +65,13 @@ NIKDY necommituj `.env`! Pozri `.env.example` pre zoznam premenných.
 - Meniť `main` branch priamo – vždy cez PR
 - Mazať existujúce workflow súbory bez potvrdenia
 - Pridávať nové npm/pip závislosti bez schválenia majiteľom
+- Ukladať MENUMAT artefakty (mockupy, audity, snapshoty, dokumenty) do tohto repozitára
+
+### 🚧 Hard stop: MENUMAT vs DreamAir
+
+- Tento repozitár je striktne pre DreamAir (`dreamair-web`).
+- Ak úloha patrí do MENUMAT, práce sa majú vykonať iba v MENUMAT repozitári.
+- Pri pochybnosti vždy najprv over názov repozitára/branch pred úpravami.
 
 ## 📝 Konvencie
 
