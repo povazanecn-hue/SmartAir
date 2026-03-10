@@ -1053,7 +1053,8 @@
     </section>
 
     <script>
-        const PRODUCT_STORAGE_KEY = 'smartair_selected_products';
+        const PRODUCT_STORAGE_KEY = 'dreamair_selected_products';
+        const LEGACY_PRODUCT_STORAGE_KEY = 'smartair_selected_products';
 
         // Toggle dropdown
         function toggleDropdown(el) {
@@ -1091,7 +1092,10 @@
 
         function getSelectedProducts() {
             try {
-                return JSON.parse(localStorage.getItem(PRODUCT_STORAGE_KEY) || '[]');
+                const raw = localStorage.getItem(PRODUCT_STORAGE_KEY)
+                    || localStorage.getItem(LEGACY_PRODUCT_STORAGE_KEY)
+                    || '[]';
+                return JSON.parse(raw);
             } catch (error) {
                 return [];
             }

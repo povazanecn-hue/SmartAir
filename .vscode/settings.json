@@ -1,4 +1,14 @@
 {
+  // Schema validation
+  "json.schemas": [
+    {
+      "fileMatch": [".vscode/settings.json"],
+      "schema": {
+        "type": "object"
+      }
+    }
+  ],
+
   // Python test discovery and runner
   "python.testing.pytestEnabled": true,
   "python.testing.pytestArgs": [
@@ -35,5 +45,52 @@
     "**/*.pyc",
     "**/__pycache__/**"
   ],
-  "liveServer.settings.AdvanceCustomBrowserCmdLine": ""
+  "liveServer.settings.AdvanceCustomBrowserCmdLine": "",
+  "telemetry.editStats.showStatusBar": true,
+  "files.autoSave": "onWindowChange",
+  "editor.defaultFormatter": "vscode.css-language-features",
+  "editor.mouseWheelZoom": true,
+  "editor.formatOnPaste": true,
+  "editor.allowVariableFontsInAccessibilityMode": true,
+  "editor.autoClosingBrackets": "always",
+  "editor.autoClosingComments": "always",
+  "editor.autoIndentOnPaste": true,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "editor.codeActions.triggerOnFocusChange": true,
+  "editor.defaultFoldingRangeProvider": "GitHub.copilot-chat",
+  "editor.definitionLinkOpensInPeek": true,
+  "editor.experimental.asyncTokenizationLogging": true,
+  "editor.hideCursorInOverviewRuler": true,
+  "editor.linkedEditing": true,
+  "editor.tabFocusMode": true,
+  "editor.trimWhitespaceOnDelete": true,
+  "editor.unfoldOnClickAfterEndOfLine": false,
+  "editor.aiStats.enabled": true,
+  "editor.experimental.asyncTokenizationVerification": true,
+  "editor.experimental.preferTreeSitter.css": true,
+  "editor.experimental.preferTreeSitter.typescript": true,
+  "editor.experimentalGpuAcceleration": "on",
+  "diffEditor.codeLens": true,
+  "editor.formatOnType": true,
+  "diffEditor.experimental.showMoves": true,
+  "diffEditor.experimental.useTrueInlineView": true,
+  "editor.suggest.snippetsPreventQuickSuggestions": true,
+  "editor.inlineSuggest.triggerCommandOnProviderChange": true,
+  "files.autoSaveWhenNoErrors": true,
+  "files.autoSaveWorkspaceFilesOnly": true,
+  "files.readonlyFromPermissions": true,
+  "workbench.browser.openLocalhostLinks": true,
+  "workbench.commandPalette.preserveInput": true,
+  "workbench.externalUriOpeners": {
+    "workbench.externalUriOpeners": "simpleBrowser.open"
+  },
+  "workbench.experimental.cloudChanges.partialMatches.enabled": true,
+  "workbench.experimental.share.enabled": true,
+  "workbench.secondarySideBar.forceMaximized": false,
+  "workbench.activityBar.compact": true,
+  "workbench.activityBar.autoHide": true,
+  "xlsxViewer.csv.firstRowIsHeader": true,
+  "xlsxViewer.csv.stickyHeader": true,
+  "xlsxViewer.tsv.firstRowIsHeader": true,
+  "xlsxViewer.tsv.stickyHeader": true
 }

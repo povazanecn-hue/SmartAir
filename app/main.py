@@ -14,6 +14,29 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
 
+# ============== Tracing Setup (OpenTelemetry) ==============
+from opentelemetry import trace
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+from opentelemetry.sdk.resources import Resource
+from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
+from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
+from opentelemetry.instrumentation.httpx import HTTPXClientInstrumentor
+
+
+def setup_tracing(service_name: str = "dreamair-api") -> None:
+    """Configure OpenTelemetry tracing with OTLP gRPC exporter (localhost:4317)."""
+    resource = Resource.create({"service.name": service_name})
+    provider = TracerProvider(resource=resource)
+    otlp_endpoint = os.environ.get("OTEL_EXPORTER_OTLP_ENDPOINT", "http://localhost:4317")
+    exporter = OTLPSpanExporter(endpoint=otlp_endpoint, insecure=True)
+    provider.add_span_processor(BatchSpanProcessor(exporter))
+    trace.set_tracer_provider(provider)
+    HTTPXClientInstrumentor().instrument()
+
+
+setup_tracing()
+
 
 # ============== Chat Models ==============
 class ChatMessage(BaseModel):
@@ -166,6 +189,8 @@ config = _load_config()
 cors_origins: List[str] = config.get("cors_origins", ["*"])
 
 app = FastAPI(title="Dream Air API")
+
+FastAPIInstrumentor.instrument_app(app)
 
 app.add_middleware(
     CORSMiddleware,

@@ -1,4 +1,4 @@
-import { readFileSync } from "fs";
+import { existsSync, readFileSync } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -237,10 +237,16 @@ function pickModels(kwNeeded: number, maxBudget?: number): Product[] {
 }
 
 async function buildWidgetHtml(): Promise<string> {
-  const js = readFileSync(path.join(WEB_DIST, "smartair-widget.js"), "utf-8");
-  const css = readFileSync(path.join(WEB_DIST, "smartair-widget.css"), "utf-8");
+  const jsPath = existsSync(path.join(WEB_DIST, "dreamair-widget.js"))
+    ? path.join(WEB_DIST, "dreamair-widget.js")
+    : path.join(WEB_DIST, "smartair-widget.js");
+  const cssPath = existsSync(path.join(WEB_DIST, "dreamair-widget.css"))
+    ? path.join(WEB_DIST, "dreamair-widget.css")
+    : path.join(WEB_DIST, "smartair-widget.css");
+  const js = readFileSync(jsPath, "utf-8");
+  const css = readFileSync(cssPath, "utf-8");
   return `
-<div id="smartair-root"></div>
+<div id="dreamair-root"></div>
 <style>${css}</style>
 <script type="module">
 ${js}
@@ -249,23 +255,23 @@ ${js}
 }
 
 async function main() {
-  const server = new McpServer({ name: "smartair-mcp", version: "0.1.0" });
+  const server = new McpServer({ name: "dreamair-mcp", version: "0.1.0" });
 
   registerAppResource(
     server,
-    "smartair-configurator",
-    "ui://widget/smartair-configurator-v1.html",
+    "dreamair-configurator",
+    "ui://widget/dreamair-configurator-v1.html",
     {},
     async () => ({
       contents: [
         {
-          uri: "ui://widget/smartair-configurator-v1.html",
+          uri: "ui://widget/dreamair-configurator-v1.html",
           mimeType: RESOURCE_MIME_TYPE,
           text: await buildWidgetHtml(),
           _meta: {
             ui: {
               prefersBorder: true,
-              domain: "https://smartair.space",
+              domain: "https://dreamair.space",
               csp: {
                 connectDomains: [],
                 resourceDomains: [],
@@ -342,7 +348,7 @@ async function main() {
 
   registerAppTool(
     server,
-    "smartair_recommend",
+    "dreamair_recommend",
     {
       title: "Odporučiť klimatizáciu",
       description: "Use this when you need to size and suggest Dream Air AC models.",
@@ -359,7 +365,70 @@ async function main() {
       },
       _meta: {
         ui: {
-          resourceUri: "ui://widget/smartair-configurator-v1.html",
+          resourceUri: "ui://widget/dreamair-configurator-v1.html",
+          visibility: ["model", "app"],
+        },
+        "openai/toolInvocation/invoking": "Počítam výkon a hľadám vhodné modely...",
+        "openai/toolInvocation/invoked": "Mám odporúčanie pripravené.",
+      },
+    },
+    async (input: ToolInput) => {
+      const load = estimateCoolingLoad(input);
+      const suggestions = pickModels(load.kw, input.maxBudget);
+
+      const structuredContent = {
+        roomArea: input.roomArea,
+        roomHeight: input.roomHeight ?? 2.7,
+        orientation: input.orientation,
+        recommendedKw: load.kw,
+        recommendedBtu: load.totalBtu,
+        topModels: suggestions.map((s) => ({
+          id: s.id,
+          name: s.name,
+          capacityKw: s.capacityKw,
+          areaLabel: s.areaLabel,
+          price: s.price,
+        })),
+      };
+
+      const contentText = [
+        `Odporúčaný výkon: ${load.kw} kW (~${load.totalBtu} BTU).`,
+        suggestions.length
+          ? `Najbližšie modely: ${suggestions.map((s) => `${s.name} (${s.capacityKw} kW)`).join(", ")}.`
+          : "V katalógu som nenašiel žiadne modely v rozpočte.",
+      ].join(" ");
+
+      return {
+        structuredContent,
+        content: [{ type: "text", text: contentText }],
+        _meta: {
+          catalogSample: suggestions,
+          orientationBoost: load.orientationBoost,
+        },
+      };
+    }
+  );
+
+  registerAppTool(
+    server,
+    "smartair_recommend",
+    {
+      title: "Odporučiť klimatizáciu (legacy)",
+      description: "Legacy alias pre kompatibilitu so staršími klientmi.",
+      inputSchema: {
+        roomArea: z.number().positive(),
+        roomHeight: z.number().optional(),
+        orientation: z.enum(["north", "east", "south", "west", "south-west", "north-west"]).optional(),
+        maxBudget: z.number().optional(),
+      },
+      annotations: {
+        readOnlyHint: true,
+        openWorldHint: false,
+        destructiveHint: false,
+      },
+      _meta: {
+        ui: {
+          resourceUri: "ui://widget/dreamair-configurator-v1.html",
           visibility: ["model", "app"],
         },
         "openai/toolInvocation/invoking": "Počítam výkon a hľadám vhodné modely...",
@@ -431,7 +500,7 @@ async function main() {
   });
 
   httpServer.listen(port, () => {
-    console.log(`SmartAir MCP server running on http://localhost:${port}/mcp`);
+    console.log(`DreamAir MCP server running on http://localhost:${port}/mcp`);
   });
 }
 

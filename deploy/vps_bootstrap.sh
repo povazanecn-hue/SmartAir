@@ -2,9 +2,9 @@
 set -euo pipefail
 
 # Usage: sudo bash vps_bootstrap.sh <api_domain> <images_domain>
-API_DOMAIN="${1:-api.smartair.space}"
-IMAGES_DOMAIN="${2:-images.smartair.space}"
-APP_DIR="/opt/smartair"
+API_DOMAIN="${1:-api.dreamair.space}"
+IMAGES_DOMAIN="${2:-images.dreamair.space}"
+APP_DIR="/opt/dreamair"
 PY=python3
 
 if [ "${EUID:-$(id -u)}" -ne 0 ]; then
@@ -18,15 +18,20 @@ apt-get install -y $PY $PY-venv $PY-pip nginx unzip
 
 # Create app directories
 mkdir -p "$APP_DIR"
-mkdir -p /var/www/smartair/images
+mkdir -p /var/www/dreamair/images
 
-# Deploy application code from /tmp/smartair_deploy (uploaded by deploy script)
-if [ -d /tmp/smartair_deploy/app ]; then
-  rm -rf "$APP_DIR/app"
-  cp -r /tmp/smartair_deploy/app "$APP_DIR/app"
+# Deploy application code from /tmp/dreamair_deploy (uploaded by deploy script)
+DEPLOY_TMP_DIR="/tmp/dreamair_deploy"
+if [ ! -d "$DEPLOY_TMP_DIR" ] && [ -d /tmp/smartair_deploy ]; then
+  DEPLOY_TMP_DIR="/tmp/smartair_deploy"
 fi
-if [ -f /tmp/smartair_deploy/requirements.txt ]; then
-  cp /tmp/smartair_deploy/requirements.txt "$APP_DIR/requirements.txt"
+
+if [ -d "$DEPLOY_TMP_DIR/app" ]; then
+  rm -rf "$APP_DIR/app"
+  cp -r "$DEPLOY_TMP_DIR/app" "$APP_DIR/app"
+fi
+if [ -f "$DEPLOY_TMP_DIR/requirements.txt" ]; then
+  cp "$DEPLOY_TMP_DIR/requirements.txt" "$APP_DIR/requirements.txt"
 fi
 
 # Python venv + deps
@@ -41,9 +46,9 @@ else
 fi
 
 # Systemd service
-cat >/etc/systemd/system/smartair.service <<SERVICE
+cat >/etc/systemd/system/dreamair.service <<SERVICE
 [Unit]
-Description=SmartAir API (Uvicorn)
+Description=DreamAir API (Uvicorn)
 After=network.target
 
 [Service]
@@ -59,11 +64,11 @@ WantedBy=multi-user.target
 SERVICE
 
 systemctl daemon-reload
-systemctl enable smartair.service
-systemctl restart smartair.service
+systemctl enable dreamair.service
+systemctl restart dreamair.service
 
 # Nginx config
-cat >/etc/nginx/sites-available/smartair_api.conf <<NGINX
+cat >/etc/nginx/sites-available/dreamair_api.conf <<NGINX
 server {
   listen 80;
   listen [::]:80;
@@ -87,7 +92,7 @@ server {
   listen [::]:80;
     server_name $IMAGES_DOMAIN;
 
-    root /var/www/smartair;
+    root /var/www/dreamair;
     index index.html;
 
     location / {
@@ -96,12 +101,12 @@ server {
 }
 NGINX
 
-ln -sf /etc/nginx/sites-available/smartair_api.conf /etc/nginx/sites-enabled/smartair_api.conf
+ln -sf /etc/nginx/sites-available/dreamair_api.conf /etc/nginx/sites-enabled/dreamair_api.conf
 if [ -f /etc/nginx/sites-enabled/default ]; then rm -f /etc/nginx/sites-enabled/default; fi
 
 # Health file for images
-mkdir -p /var/www/smartair
-printf "ok\n" > /var/www/smartair/health.txt
+mkdir -p /var/www/dreamair
+printf "ok\n" > /var/www/dreamair/health.txt
 
 nginx -t
 systemctl restart nginx

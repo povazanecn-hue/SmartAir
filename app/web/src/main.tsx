@@ -59,14 +59,14 @@ function App() {
     <div style={styles.card}>
       <header style={styles.header}>
         <div>
-          <div style={styles.eyebrow}>SmartAir • ChatGPT App</div>
+          <div style={styles.eyebrow}>DreamAir • ChatGPT App</div>
           <h2 style={{ margin: 0 }}>Výber klimatizácie</h2>
           <p style={styles.muted}>Renderuje posledný výsledok z MCP nástroja (ui/notifications/tool-result).</p>
         </div>
         <button
           style={styles.button}
           onClick={() =>
-            callTool("smartair_recommend", {
+            callTool("dreamair_recommend", {
               roomArea: 25,
               roomHeight: 2.7,
               orientation: "south",

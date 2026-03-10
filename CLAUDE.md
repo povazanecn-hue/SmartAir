@@ -55,6 +55,15 @@ NIKDY necommituj `.env`! Pozri `.env.example` pre zoznam premenných.
 
 ## 🚦 Pravidlá pre AI asistentov
 
+### 🔤 Branding a názvoslovie (povinné)
+- Používaj názov **DreamAir** (nie SmartAir) vo všetkých nových výstupoch.
+- Legacy identifikátory `smartair_*` ponechaj len kvôli spätnej kompatibilite.
+- Pri nových súboroch, service menách, URL a storage kľúčoch používaj prefix `dreamair`.
+
+### 🧰 GitHub CLI (`gh`) – kde inštalovať
+- Inštaluj `gh` v prostredí, kde beží Git workflow pre tento repo (lokálny OS / WSL / Dev Container / CI runner).
+- Minimálna kontrola po inštalácii: `gh --version && gh auth login && gh repo list`.
+
 ### ✅ Povolené
 - Upravovať kód v `/workers` a `/deploy`
 - Opravovať chyby, pridávať features podľa zadania
@@ -84,4 +93,4 @@ NIKDY necommituj `.env`! Pozri `.env.example` pre zoznam premenných.
 
 - `menumat-ecb44ba0` – MENUMAT aplikácia (reštauračný menu systém)
 - `MENUGENERATOR` – experimentálny menu generátor
-- Majiteľ prevádzkuje aj firmu SmartAir s.r.o. (samostatná)
+- Majiteľ prevádzkuje aj firmu DreamAir s.r.o. (samostatná)

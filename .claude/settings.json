@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(powershell.exe -NoProfile -Command \"git config --global --list\")",
+      "Bash(powershell.exe -NoProfile -Command \"Get-Content ''D:\\\\Dev\\\\GitHub\\\\menumat-ecb44ba0\\\\.github\\\\workflows\\\\pr-check.yml'' -ErrorAction SilentlyContinue\")",
+      "Bash(git -C \"/d/Dev/GitHub/KOLIESKO\" status --short)",
+      "Bash(git -C \"/d/Dev/GitHub/mcp-inspector\" status --short)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\Nor3ert"
+    ]
+  }
+}

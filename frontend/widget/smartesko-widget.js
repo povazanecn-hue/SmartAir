@@ -7,8 +7,8 @@
     'use strict';
 
     const CONFIG = {
-        apiEndpoint: 'https://api.smartair.space/chat',
-        mascotImage: 'https://images.smartair.space/smartesko-avatar.png',
+        apiEndpoint: 'https://api.dreamair.space/chat',
+        mascotImage: 'https://images.dreamair.space/smartesko-avatar.png',
         companyName: 'Dream Air',
         assistantName: 'Dreamairko (Drímerko)',
         welcomeMessage: 'Ahoj! Som Dreamairko (hovorovo Drímerko), AI sprievodca Dream Air. Pomôžem vám vybrať správnu klimatizáciu, porovnať modely a orientačne prepočítať montáž. Môžeme začať krokovým sprievodcom?',
