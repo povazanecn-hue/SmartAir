@@ -7,20 +7,21 @@
     'use strict';
 
     const CONFIG = {
-        apiEndpoint: 'https://api.smartair.space/reservations',
+        apiEndpoint: 'https://api.dreamair.space/reservations',
         phone: '+421 915 033 440',
-        productsStorageKey: 'smartair_selected_products'
+        productsStorageKey: 'dreamair_selected_products',
+        legacyProductsStorageKey: 'smartair_selected_products'
     };
 
     const styles = `
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-        .smartair-reservation-form * {
+        .dreamair-reservation-form * {
             box-sizing: border-box;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
-        .smartair-reservation-form {
+        .dreamair-reservation-form {
             max-width: 600px;
             margin: 0 auto;
             padding: 32px;
@@ -29,7 +30,7 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
-        .smartair-reservation-form h2 {
+        .dreamair-reservation-form h2 {
             font-size: 28px;
             font-weight: 700;
             color: #1a1a2e;
@@ -37,7 +38,7 @@
             text-align: center;
         }
 
-        .smartair-reservation-form .subtitle {
+        .dreamair-reservation-form .subtitle {
             color: #666;
             text-align: center;
             margin-bottom: 32px;
@@ -278,11 +279,11 @@
     `;
 
     function createForm() {
-        const container = document.getElementById('smartair-reservation') || document.body;
+        const container = document.getElementById('dreamair-reservation') || document.body;
 
         container.innerHTML = `
             <style>${styles}</style>
-            <div class="smartair-reservation-form" id="reservation-form-container">
+            <div class="dreamair-reservation-form" id="reservation-form-container">
                 <h2>📅 Rezervácia obhliadky</h2>
                 <p class="subtitle">Vyplňte formulár a my vás budeme kontaktovať</p>
 
@@ -388,7 +389,10 @@
 
         function getSelectedProducts() {
             try {
-                return JSON.parse(localStorage.getItem(CONFIG.productsStorageKey) || '[]');
+                const raw = localStorage.getItem(CONFIG.productsStorageKey)
+                    || localStorage.getItem(CONFIG.legacyProductsStorageKey)
+                    || '[]';
+                return JSON.parse(raw);
             } catch (error) {
                 return [];
             }

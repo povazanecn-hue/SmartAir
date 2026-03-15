@@ -13,7 +13,7 @@
 - **Majiteľ:** Mgr. Norbert Považanec
 - **Web:** `dreamair-web` (GitHub) → Webflow CMS + Cloudflare Workers
 
-### SmartAir s.r.o.
+### DreamAir (legacy SmartAir) s.r.o.
 - Sesterská firma, rovnaký majiteľ
 - Materiály a projekty prešli pod DreamAir (feb 2026)
 
@@ -91,6 +91,6 @@ doppler run -- npm run dev          # v menumat-ecb44ba0
 | Dátum | Akcia |
 |---|---|
 | 2026-02-23 | MENUGENERATOR archivovaný, poznatky zachované v CLAUDE.md |
-| 2026-02-23 | SmartAir → dreamair-web premenovaný |
+| 2026-02-23 | DreamAir rebranding dokončený (legacy názov: SmartAir) |
 | 2026-02-23 | Doppler nastavený: 2 projekty (dreamair, menumat) |
 | 2026-02-23 | GitHub audit: -353 MB, Vulnerability Alerts zapnuté |

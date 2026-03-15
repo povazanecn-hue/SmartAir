@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "ChatGPT App MCP server and widget for SmartAir (Dream Air configurator).",
+  "description": "ChatGPT App MCP server and widget for DreamAir configurator.",
   "scripts": {
     "dev": "tsx watch server/src/index.ts",
     "start": "node dist/server/src/index.js",
